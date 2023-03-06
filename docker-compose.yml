@@ -23,7 +23,7 @@ services:
       #- ENCRYPT=1 # Uncomment to enable database encryption.
 
   phpfpm:
-    image: itkdev/php8.1-fpm:latest
+    image: itkdev/php8.2-fpm:latest
     networks:
       - app
     extra_hosts:
@@ -61,6 +61,18 @@ services:
 #      HTTPS config - uncomment to enable redirect from :80 to :443
 #      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=redirect-to-https"
 #      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+
+  rabbit:
+    image: rabbitmq:3.9-management
+    networks:
+      - app
+      - frontend
+    ports:
+      - "15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+      - RABBITMQ_ERLANG_COOKIE='d53f319cd7376f8f840aaf9889f315ab'
 
   mailhog:
     image: itkdev/mailhog
