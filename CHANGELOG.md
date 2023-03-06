@@ -15,5 +15,3 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Symfony 6.2
 - API Platform 3.1
 - Basic ITK development setup
-
-

@@ -14,7 +14,6 @@
         </ignoreFiles>
     </projectFiles>
     <plugins>
-        <pluginClass class="HectorJ\SafePHPPsalmPlugin\Plugin"/>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
             <containerXml>var/cache/dev/App_KernelDevDebugContainer.xml</containerXml>
         </pluginClass>
