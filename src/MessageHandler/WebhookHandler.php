@@ -22,6 +22,9 @@ final class WebhookHandler
     ) {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function __invoke(Webhook $hook): void
     {
         $this->metricsService->counter('webhook_called_total', 'Webhook called counter', 1, ['type' => 'webhook']);
