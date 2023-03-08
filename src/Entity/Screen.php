@@ -13,7 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
     operations: [
         new Get(),
         new GetCollection(),
-    ]
+    ],
+    security: "is_granted('ROLE_API_USER')"
 )]
 class Screen
 {
