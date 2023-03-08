@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(
     operations: [
         new Get(),
-        new GetCollection()
+        new GetCollection(),
     ]
 )]
 class Screen

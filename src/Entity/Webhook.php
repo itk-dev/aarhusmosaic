@@ -7,7 +7,7 @@ use ApiPlatform\Metadata\Post;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(operations: [
-    new Post(status: 202, output: false, messenger: true)
+    new Post(status: 202, output: false, messenger: true),
 ])]
 final class Webhook
 {
