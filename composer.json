@@ -6,7 +6,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/core": "^3.1",
@@ -14,15 +14,20 @@
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
+        "itk-dev/metrics-bundle": "^1.0",
         "nelmio/cors-bundle": "^2.3",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.16",
+        "symfony/amqp-messenger": "6.2.*",
         "symfony/asset": "6.2.*",
         "symfony/console": "6.2.*",
+        "symfony/doctrine-messenger": "6.2.*",
         "symfony/dotenv": "6.2.*",
         "symfony/expression-language": "6.2.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.2.*",
+        "symfony/http-client": "6.2.*",
+        "symfony/messenger": "6.2.*",
         "symfony/property-access": "6.2.*",
         "symfony/property-info": "6.2.*",
         "symfony/runtime": "6.2.*",
@@ -100,10 +105,9 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.14",
-        "hectorj/safe-php-psalm-plugin": "^1.4",
-        "psalm/plugin-symfony": "^4.0",
+        "psalm/plugin-symfony": "^5.0",
         "symfony/maker-bundle": "^1.48",
-        "vimeo/psalm": "^4.30",
+        "vimeo/psalm": "^5.0",
         "weirdan/doctrine-psalm-plugin": "^2.8"
     }
 }
