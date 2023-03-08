@@ -14,8 +14,8 @@ class ApiUser implements UserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: "json")]
-    private array $roles = [];
+    #[ORM\Column(type: 'json')]
+    private array $roles = ['ROLE_API_USER'];
 
     #[ORM\Column(length: 255, unique: true)]
     private string $token;
@@ -44,7 +44,6 @@ class ApiUser implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_API_USER';
 
         return array_unique($roles);
     }

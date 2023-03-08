@@ -9,7 +9,8 @@ class OpenApiFactory implements OpenApiFactoryInterface
 {
     public function __construct(
         private readonly OpenApiFactoryInterface $decorated,
-    ) {}
+    ) {
+    }
 
     public function __invoke(array $context = []): OpenApi
     {
@@ -18,7 +19,7 @@ class OpenApiFactory implements OpenApiFactoryInterface
         $securitySchemes = $openApi->getComponents()->getSecuritySchemes();
         $securitySchemes['access_token'] = new \ArrayObject([
             'type' => 'http',
-            'scheme' => 'bearer'
+            'scheme' => 'bearer',
         ]);
 
         return $openApi;
