@@ -20,6 +20,9 @@ class OpenApiFactory implements OpenApiFactoryInterface
         $openApi = $this->decorated->__invoke($context);
 
         $securitySchemes = $openApi->getComponents()->getSecuritySchemes();
+        if (is_null($securitySchemes)) {
+            $securitySchemes = [];
+        }
         $securitySchemes['access_token'] = new \ArrayObject([
             'type' => 'http',
             'scheme' => 'bearer',

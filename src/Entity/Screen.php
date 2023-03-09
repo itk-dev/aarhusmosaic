@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use App\Repository\ScreenRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: ScreenRepository::class)]
 #[ApiResource(
@@ -18,6 +19,8 @@ use Doctrine\ORM\Mapping as ORM;
 )]
 class Screen
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -32,8 +35,8 @@ class Screen
     #[ORM\Column]
     private ?int $gridRows = null;
 
-    #[ORM\Column]
-    private array $variant = [];
+    #[ORM\Column(type: 'json', nullable: true)]
+    private string $variant = '';
 
     public function getId(): ?int
     {
@@ -76,12 +79,12 @@ class Screen
         return $this;
     }
 
-    public function getVariant(): array
+    public function getVariant(): string
     {
         return $this->variant;
     }
 
-    public function setVariant(array $variant): self
+    public function setVariant(string $variant): self
     {
         $this->variant = $variant;
 

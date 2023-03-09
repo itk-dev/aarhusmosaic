@@ -17,3 +17,4 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Basic ITK development setup
 - Added AMQP and Doctrine message packages
 - Added metrics bundle and http client
+- Added timestampable to entities

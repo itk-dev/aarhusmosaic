@@ -4,11 +4,14 @@ namespace App\Entity;
 
 use App\Repository\ApiUserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: ApiUserRepository::class)]
 class ApiUser implements UserInterface
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
