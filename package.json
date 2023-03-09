@@ -3,12 +3,29 @@
   "private": true,
   "description": "Tooling setup for linting",
   "devDependencies": {
-    "markdownlint-cli": "^0.27.1"
+    "@babel/preset-react": "^7.18.6",
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/ux-react": "file:vendor/symfony/ux-react/assets",
+    "@symfony/webpack-encore": "^4.2.0",
+    "markdownlint-cli": "^0.27.1",
+    "react": "^18.0",
+    "react-dom": "^18.0"
   },
   "scripts": {
     "coding-standards-check/markdownlint": "markdownlint README.md CHANGELOG.md docs/**/*.md",
     "coding-standards-check": "yarn coding-standards-check/markdownlint",
     "coding-standards-apply/markdownlint": "markdownlint --fix README.md CHANGELOG.md docs/**/*.md",
-    "coding-standards-apply": "yarn coding-standards-apply/markdownlint"
+    "coding-standards-apply": "yarn coding-standards-apply/markdownlint",
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "dependencies": {
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "webpack": "^5.76.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-notifier": "^1.15.0"
   }
 }

@@ -15,5 +15,7 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+
+        <div {{ react_component('TestComponent', { 'fullName': fullname }) }}></div>
     </body>
 </html>
