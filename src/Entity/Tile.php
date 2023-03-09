@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use App\Repository\TileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: TileRepository::class)]
 #[ApiResource(
@@ -18,6 +19,8 @@ use Doctrine\ORM\Mapping as ORM;
 )]
 class Tile
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -38,7 +41,7 @@ class Tile
     #[ORM\Column(length: 255)]
     private ?string $mail = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: 'json', nullable: true)]
     private array $extra = [];
 
     #[ORM\Column]
