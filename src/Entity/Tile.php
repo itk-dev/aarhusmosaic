@@ -42,7 +42,7 @@ class Tile
     private ?string $mail = null;
 
     #[ORM\Column(type: 'json', nullable: true)]
-    private array $extra = [];
+    private ?string $extra = '';
 
     #[ORM\Column]
     private ?bool $accepted = null;
@@ -112,12 +112,12 @@ class Tile
         return $this;
     }
 
-    public function getExtra(): array
+    public function getExtra(): ?string
     {
         return $this->extra;
     }
 
-    public function setExtra(?array $extra): self
+    public function setExtra(?string $extra): self
     {
         $this->extra = $extra;
 

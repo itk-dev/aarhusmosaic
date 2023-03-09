@@ -36,7 +36,7 @@ class Screen
     private ?int $gridRows = null;
 
     #[ORM\Column(type: 'json', nullable: true)]
-    private array $variant = [];
+    private string $variant = '';
 
     public function getId(): ?int
     {
@@ -79,12 +79,12 @@ class Screen
         return $this;
     }
 
-    public function getVariant(): array
+    public function getVariant(): string
     {
         return $this->variant;
     }
 
-    public function setVariant(array $variant): self
+    public function setVariant(string $variant): self
     {
         $this->variant = $variant;
 

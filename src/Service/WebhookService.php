@@ -35,6 +35,7 @@ class WebhookService
 //        $submission = $this->getWebformSubmission($submissionUrl, $user->getWebformApiKey());
 //
 //        return $this->getValidatedData($submission);
+        return [];
     }
 
     public function getWebformSubmission(string $submissionUrl, string $webformApiKey): array
@@ -50,6 +51,8 @@ class WebhookService
         } catch (\Exception $exception) {
             // throw new WebformSubmissionRetrievalException($exception->getMessage(), $exception->getCode());
         }
+
+        return [];
     }
 
     public function sortWebformSubmissionDataByType(array $webformSubmission): array
@@ -78,6 +81,7 @@ class WebhookService
 //        }
 //
 //        return $sortedData;
+        return [];
     }
 
     public function getValidatedData(array $webformSubmission): array
@@ -140,5 +144,6 @@ class WebhookService
 //        }
 //
 //        return $acceptedSubmissions;
+        return [];
     }
 }
