@@ -231,9 +231,13 @@ components:
         gridRows:
           type: integer
         variant:
-          type: array
-          items:
-            type: string
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
     Screen.jsonld:
       type: object
       description: ''
@@ -272,9 +276,13 @@ components:
         gridRows:
           type: integer
         variant:
-          type: array
-          items:
-            type: string
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
     Tile:
       type: object
       description: ''
@@ -294,12 +302,16 @@ components:
         mail:
           type: string
         extra:
-          type: array
-          items:
-            type: string
+          type: string
           nullable: true
         accepted:
           type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
     Tile.jsonld:
       type: object
       description: ''
@@ -342,12 +354,16 @@ components:
         mail:
           type: string
         extra:
-          type: array
-          items:
-            type: string
+          type: string
           nullable: true
         accepted:
           type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
     Webhook:
       type: object
       description: ''
