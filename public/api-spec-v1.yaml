@@ -306,6 +306,10 @@ components:
           nullable: true
         accepted:
           type: boolean
+        tags:
+          type: array
+          items:
+            type: string
         createdAt:
           type: string
           format: date-time
@@ -358,6 +362,10 @@ components:
           nullable: true
         accepted:
           type: boolean
+        tags:
+          type: array
+          items:
+            type: string
         createdAt:
           type: string
           format: date-time
