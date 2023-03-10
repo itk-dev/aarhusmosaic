@@ -48,7 +48,7 @@ class Tile
     #[ORM\Column]
     private ?bool $accepted = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: 'json', nullable: true)]
     private array $tags = [];
 
     public function getId(): ?int
