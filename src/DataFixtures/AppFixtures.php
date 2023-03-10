@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\ApiUser;
+use App\Entity\Screen;
 use App\Entity\Tile;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -10,7 +12,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // Categories
+        // Tiles
         $json = \file_get_contents(__DIR__.'/data/tiles.json');
         $data = \json_decode($json, false, 512, JSON_THROW_ON_ERROR);
 
@@ -33,31 +35,29 @@ class AppFixtures extends Fixture
             $manager->persist($tile);
         }
 
-//        $categories = [];
-//
-//        foreach ($data as $datum) {
-//            $category = new Category();
-//            $category->setName($datum->name)
-//                ->setCqlSearch($datum->cql_search);
-//
-//            $manager->persist($category);
-//
-//            $categories[$datum->id] = $category;
-//        }
-//
-//        // Search Runs
-//        $json = \file_get_contents(__DIR__.'/Data/search_runs.json');
-//        $data = \json_decode($json, false, 512, JSON_THROW_ON_ERROR);
-//
-//        foreach ($data as $datum) {
-//            $category = $categories[$datum->category_id];
-//            $runAt = new \DateTimeImmutable($datum->run_at);
-//            $searchRun = new SearchRun($category, $runAt);
-//            $searchRun->setIsSuccess((bool) $datum->is_success)
-//                ->setErrorMessage($datum->error_message);
-//
-//            $manager->persist($searchRun);
-//        }
+        // Screens
+        $json = \file_get_contents(__DIR__.'/data/screen.json');
+        $data = \json_decode($json, false, 512, JSON_THROW_ON_ERROR);
+
+        foreach ($data as $datum) {
+            $screen = new Screen();
+            $screen->setTitle($datum->title)
+                ->setGridColumns($datum->gridColumns)
+                ->setGridRows($datum->gridRows)
+                ->setVariant(json_encode($datum->variant));
+            $manager->persist($screen);
+        }
+
+        // API user
+        $json = \file_get_contents(__DIR__.'/data/api_user.json');
+        $data = \json_decode($json, false, 512, JSON_THROW_ON_ERROR);
+
+        foreach ($data as $datum) {
+            $api = new ApiUser();
+            $api->setToken($datum->token)
+                ->setRemoteApiKey($datum->remoteApiKey);
+            $manager->persist($api);
+        }
 
         $manager->flush();
     }
