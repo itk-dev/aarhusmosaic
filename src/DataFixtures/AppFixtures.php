@@ -22,7 +22,6 @@ class AppFixtures extends Fixture
             $src = __DIR__.'/data/'.$datum->image;
             copy($src, $dest);
 
-
             $tile = new Tile();
             $tile->setTitle($datum->title)
                 ->setDescription($datum->description)
