@@ -13,7 +13,7 @@ class FrontendController extends AbstractController
     {
         // TODO: Replace exampleProp with required values.
         return $this->render('index.html.twig', [
-            'exampleProp' => "exampleValue"
+            'exampleProp' => 'exampleValue',
         ]);
     }
 }
