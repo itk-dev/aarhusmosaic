@@ -11,6 +11,9 @@ class FrontendController extends AbstractController
     #[Route('/', name: 'homepage')]
     public function index(): Response
     {
-        return $this->render('index.html.twig', []);
+        // TODO: Replace exampleProp with required values.
+        return $this->render('index.html.twig', [
+            'exampleProp' => "exampleValue"
+        ]);
     }
 }

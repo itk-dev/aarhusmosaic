@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-PLEASE LOAD REACT HERE
+    <div {{ react_component('Mosaic', { exampleProp: exampleProp }) }}>
+        Loading...
+    </div>
 {% endblock %}
