@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import GlobalStyles from '../GlobalStyles';
 import GridItem from '../Components/GridItem/GridItem';
 import Logo from "../Components/Logo/Logo";
+import Grid from "../Components/Grid/Grid";
 import { Data } from '../Data/demoData';
 import { Settings } from '../Data/settings';
 import PropTypes from "prop-types";
@@ -15,6 +16,7 @@ function Mosaic({exampleProp}) {
         // TODO: Remove.
         console.log('exampleProp', exampleProp)
 
+        // TODO: Fix animation. It only works the first time.
         const timer = setInterval(() => {
             setRandomExpose(Math.floor(1 + Math.random() * (Data.length - 1)));
         }, 5000);
@@ -28,6 +30,8 @@ function Mosaic({exampleProp}) {
     return (
         <div className="App">
             <Grid style={{ '--grid-columns': Settings.columns, '--grid-rows': Settings.rows, }}>
+
+                {/* TODO: Randomize images. Load a new batch of tiles after 5(Many configurable) exposes? */}
                 {Data.map((item, index) => (
                     <GridItem
                         key={index}
@@ -44,24 +48,14 @@ function Mosaic({exampleProp}) {
                 description={Data[randomExpose].description}
                 image={Data[randomExpose].image}
                 exposed
-
             />
 
             {Settings.showLogo && <Logo />}
+
             <GlobalStyles />
         </div>
     );
 }
-
-// TODO: Move to separate file.
-const Grid = styled.div`
-  display: grid;
-  grid-template-rows: repeat(var(--grid-rows), 1fr);
-  grid-template-columns: repeat(var(--grid-columns), 1fr);
-  gap: 0;
-`;
-
-
 
 Mosaic.propTypes = {
     exampleProp: PropTypes.string.isRequired,
