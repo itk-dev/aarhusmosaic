@@ -6,5 +6,6 @@ export const Settings = {
   exposeBorder: true,
   tileIcons: false,
   tileBorders: false,
+  tileBorderWidth: 5,
   mosaicLogo: true,
 }
