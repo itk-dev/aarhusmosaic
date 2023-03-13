@@ -6,7 +6,6 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use App\Repository\TileRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -48,7 +47,7 @@ class Tile
     #[ORM\Column]
     private ?bool $accepted = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: 'json', nullable: true)]
     private array $tags = [];
 
     public function getId(): ?int

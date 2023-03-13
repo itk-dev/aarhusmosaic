@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Screen 1",
+    "gridColumns": 5,
+    "gridRows": 6,
+    "variant": {
+      "icons": true
+    }
+  },
+  {
+    "id": 2,
+    "title": "Screen 2",
+    "gridColumns": 4,
+    "gridRows": 6,
+    "variant": {
+      "icons": false
+    }
+  },
+  {
+    "id": 3,
+    "title": "Screen 3",
+    "gridColumns": 8,
+    "gridRows": 8,
+    "variant": {
+      "icons": true
+    }
+  },
+  {
+    "id": 4,
+    "title": "Screen 4",
+    "gridColumns": 6,
+    "gridRows": 6,
+    "variant": {
+      "icons": false
+    }
+  }
+]
