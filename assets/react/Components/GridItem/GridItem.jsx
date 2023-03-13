@@ -2,12 +2,12 @@ import React from "react";
 import styled from 'styled-components'
 import Icon from '../Icons/Icons';
 
-const GridItem = ({ variant, description, image, exposed, showIcons }) => {
+const GridItem = ({ variant, description, image, exposed, tileIcons, tileBorders }) => {
   return (
     <Wrapper className={exposed ? "exposed" : ""}>
-      <Item className={variant} style={{ '--background-image': `url(${image}`}}>
+      <Item className={variant} style={{ '--background-image': `url(${image}`, '--border-width': tileBorders ? '--border-width' : 0  }}>
         {exposed && <ItemDescription>{description}</ItemDescription>}
-        {showIcons && <ItemIcon src={Icon[variant]} alt=""/>}
+        {tileIcons && <ItemIcon src={Icon[variant]} alt=""/>}
       </Item>
     </Wrapper>
   );
