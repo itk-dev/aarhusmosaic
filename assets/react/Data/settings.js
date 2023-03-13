@@ -2,6 +2,9 @@ export const Settings = {
   gridColumns: 6,
   gridRows: 5,
   gridExpose: 3,
-  showIcons: false,
-  showLogo: true,
+  exposeIcon: true,
+  exposeBorder: true,
+  tileIcons: false,
+  tileBorders: false,
+  mosaicLogo: true,
 }

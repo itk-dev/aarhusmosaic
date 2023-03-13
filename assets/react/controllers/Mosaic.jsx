@@ -39,6 +39,7 @@ function Mosaic({exampleProp}) {
                         description={item.description}
                         image={item.image}
                         showIcons={Settings.showIcons}
+                        showBorders={Settings.showBorders}
                     />
                 ))}
             </Grid>
@@ -48,9 +49,11 @@ function Mosaic({exampleProp}) {
                 description={Data[randomExpose].description}
                 image={Data[randomExpose].image}
                 exposed
+                tileIcons={Settings.exposeIcon}
+                tileBorders={Settings.exposeBorder}
             />
 
-            {Settings.showLogo && <Logo />}
+            {Settings.mosaicLogo && <Logo />}
 
             <GlobalStyles />
         </div>
