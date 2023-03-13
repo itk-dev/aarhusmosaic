@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from 'styled-components'
 import GlobalStyles from '../GlobalStyles';
 import GridItem from '../Components/GridItem/GridItem';
-import Icon from '../Components/Icons/Icons';
+import Logo from "../Components/Logo/Logo";
 import { Data } from '../Data/demoData';
 import { Settings } from '../Data/settings';
 import PropTypes from "prop-types";
@@ -47,7 +47,7 @@ function Mosaic({exampleProp}) {
 
             />
 
-            {Settings.showLogo && <Logo src={Icon.verdensmaal} alt=""/>}
+            {Settings.showLogo && <Logo />}
             <GlobalStyles />
         </div>
     );
@@ -61,15 +61,7 @@ const Grid = styled.div`
   gap: 0;
 `;
 
-// TODO: Move to separate file.
-const Logo = styled.img`
-  position: fixed;
-  bottom: calc(var(--border-width) * 3);
-  right: calc(var(--border-width) * 3);
-  border: calc(var(--border-width) * 2) solid var(--logo-background);
-  background-color: var(--logo-background);
-  filter: var(--filter-shadow);
-`;
+
 
 Mosaic.propTypes = {
     exampleProp: PropTypes.string.isRequired,
