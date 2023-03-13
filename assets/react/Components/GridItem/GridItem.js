@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components'
 import Icon from '../Icons/Icons';
 
-const GridItem = ({ variant, title, description, image, exposed, showIcons }) => {
+const GridItem = ({ variant, description, image, exposed, showIcons }) => {
   return (
     <Wrapper className={exposed ? "exposed" : ""}>
       <Item className={variant} style={{ '--background-image': `url(${image}`}}>
@@ -12,12 +12,6 @@ const GridItem = ({ variant, title, description, image, exposed, showIcons }) =>
     </Wrapper>
   );
 }
-
-// const ItemTitle = styled.h2`
-//   font-size: var(--font-size-h2);
-//   font-weight: var(--font-weight-h2);
-//   color: white;
-// `
 
 const ItemDescription = styled.p`
   font-size: var(--font-size-h2);
