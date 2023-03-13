@@ -1,3 +1,5 @@
+// @TODO: Remove.
+
 export const Data = [
   {"id":1,"title":"Valdemar","description":"Etiam faucibus cursus urna. Ut tellus.","variant":"four","image":"./demoImages/test-photo-26.jpg"},
 {"id":2,"title":"Eric","description":"Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla.","variant":"tree","image":"./demoImages/test-photo-19.jpg"},
