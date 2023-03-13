@@ -20,14 +20,22 @@ final class WebhookHandler
     ) {
     }
 
-    public function __invoke(Webhook $hook): void
+    public function __invoke(Webhook $message): void
     {
         $this->metricsService->counter('webhook_called_total', 'Webhook called counter', 1, ['type' => 'webhook']);
 
+        $data = $this->webhookService->getData($message);
         /**
          * @TODO: User the webhook service to actually get data, when OS2Forms is installable once more.
          */
         $tile = new Tile();
+        $tile->setTitle($data['title'])
+            ->setDescription($data['description'])
+            ->setTags($data['tags'])
+            ->setMail($data['mail'])
+            ->setAccepted(false)
+            ->setExtra($data['extra'])
+            ->setImage('');
 
         $this->em->persist($tile);
         $this->em->flush();
