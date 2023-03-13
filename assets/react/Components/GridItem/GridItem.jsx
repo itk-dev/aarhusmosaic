@@ -5,7 +5,7 @@ import Icon from '../Icons/Icons';
 const GridItem = ({ variant, description, image, exposed, tileIcons, tileBorders }) => {
   return (
     <Wrapper className={exposed ? "exposed" : ""}>
-      <Item className={variant} style={{ '--background-image': `url(${image}`, '--border-width': tileBorders ? '--border-width' : 0  }}>
+      <Item className={variant} style={{ '--background-image': `url(${image}`, '--border-width': tileBorders ? 'var(--tile-border-width)' : 0  }}>
         {exposed && <ItemDescription>{description}</ItemDescription>}
         {tileIcons && <ItemIcon src={Icon[variant]} alt=""/>}
       </Item>

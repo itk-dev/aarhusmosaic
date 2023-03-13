@@ -103,7 +103,7 @@ const GlobalStyles = createGlobalStyle`
     /*
       Border
     */
-    --border-width: 5px;
+    --tile-border-width: ${Settings.tileBorderWidth}px;
 
 
     /*
