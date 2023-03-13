@@ -26,12 +26,15 @@ services:
     image: itkdev/php8.1-fpm:latest
     networks:
       - app
+      - frontend
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
       - PHP_XDEBUG_MODE=${PHP_XDEBUG_MODE:-off}
       - PHP_MAX_EXECUTION_TIME=30
       - PHP_MEMORY_LIMIT=256M
+      - PHP_APCU_ENABLED=1
+      - PHP_APCU_ENABLED_CLI=1
       # - PHP_MAIL=1 # Uncomment to enable mailhog.
       - DOCKER_HOST_DOMAIN=${COMPOSE_DOMAIN}
       - COMPOSER_VERSION=2
