@@ -32,7 +32,6 @@ function Mosaic({exampleProp}) {
                     <GridItem
                         key={index}
                         variant={item.variant}
-                        title={item.title}
                         description={item.description}
                         image={item.image}
                         showIcons={Settings.showIcons}
@@ -42,7 +41,6 @@ function Mosaic({exampleProp}) {
 
             <GridItem
                 variant={Data[randomExpose].variant}
-                title={Data[randomExpose].title}
                 description={Data[randomExpose].description}
                 image={Data[randomExpose].image}
                 exposed
