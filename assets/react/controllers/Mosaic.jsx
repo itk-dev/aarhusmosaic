@@ -35,6 +35,7 @@ function Mosaic({exampleProp}) {
                         title={item.title}
                         description={item.description}
                         image={item.image}
+                        showIcons={Settings.showIcons}
                     />
                 ))}
             </Grid>
@@ -48,7 +49,7 @@ function Mosaic({exampleProp}) {
 
             />
 
-            <Logo src={Icon.verdensmaal} alt=""/>
+            {Settings.showLogo && <Logo src={Icon.verdensmaal} alt=""/>}
             <GlobalStyles />
         </div>
     );
