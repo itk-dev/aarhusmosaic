@@ -73,6 +73,17 @@ services:
       - RABBITMQ_DEFAULT_PASS=password
       - RABBITMQ_ERLANG_COOKIE='d53f319cd7376f8f840aaf9889f315ab'
 
+  node:
+    image: node:18
+    command: yarn watch
+    networks:
+      - app
+    working_dir: /app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/app
+
   mailhog:
     image: itkdev/mailhog
     networks:
