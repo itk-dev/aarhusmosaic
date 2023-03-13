@@ -24,11 +24,11 @@ class AdminDashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        $d = $this->adminUrlGenerator
+        $dashboard = $this->adminUrlGenerator
             ->setController(TileCrudController::class)->setAction(Crud::PAGE_INDEX)
             ->generateUrl();
 
-        return $this->redirect($d);
+        return $this->redirect($dashboard);
     }
 
     public function configureDashboard(): Dashboard

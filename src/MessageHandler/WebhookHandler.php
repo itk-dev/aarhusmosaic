@@ -1,7 +1,5 @@
 <?php
 
-// api/src/Handler/PersonHandler.php
-
 namespace App\MessageHandler;
 
 use App\Entity\Tile;
