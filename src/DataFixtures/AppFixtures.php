@@ -23,10 +23,8 @@ class AppFixtures extends Fixture
             copy($src, $dest);
 
             $tile = new Tile();
-            $tile->setTitle($datum->title)
-                ->setDescription($datum->description)
+            $tile->setDescription($datum->description)
                 ->setImage('/tiles/'.basename($datum->image))
-                ->setRemoteUrl($datum->remoteUrl)
                 ->setMail($datum->mail)
                 ->setAccepted($datum->accepted)
                 ->setTags($datum->tags)
