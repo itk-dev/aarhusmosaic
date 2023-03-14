@@ -14,17 +14,32 @@ use Doctrine\ORM\QueryBuilder;
  */
 class RandomTileExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-
+    /**
+     * {@inheritDoc}
+     */
     public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, Operation $operation = null, array $context = []): void
     {
         // Do not load random when single Tile is requested by Id.
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, Operation $operation = null, array $context = []): void
     {
         $this->addWhere($queryBuilder, $resourceClass);
     }
 
+    /**
+     * Added orderBy random to query limited to tile resources.
+     *
+     * @param queryBuilder $queryBuilder
+     *   The query builder for the current query
+     * @param string $resourceClass
+     *   The resource the query runs against
+     *
+     * @return void
+     */
     private function addWhere(QueryBuilder $queryBuilder, string $resourceClass): void
     {
         if (Tile::class !== $resourceClass) {

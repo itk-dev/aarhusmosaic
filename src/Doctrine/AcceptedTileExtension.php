@@ -14,17 +14,32 @@ use Doctrine\ORM\QueryBuilder;
  */
 class AcceptedTileExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-
+    /**
+     * {@inheritDoc}
+     */
     public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, Operation $operation = null, array $context = []): void
     {
         $this->addWhere($queryBuilder, $resourceClass);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, Operation $operation = null, array $context = []): void
     {
         $this->addWhere($queryBuilder, $resourceClass);
     }
 
+    /**
+     * Filter out Tile that has not yet been marked as accepted.
+     *
+     * @param queryBuilder $queryBuilder
+     *   The query builder for the current query
+     * @param string $resourceClass
+     *   The resource the query runs against
+     *
+     * @return void
+     */
     private function addWhere(QueryBuilder $queryBuilder, string $resourceClass): void
     {
         if (Tile::class !== $resourceClass) {
