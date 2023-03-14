@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Filter\LimitFilter;
 use App\Repository\TileRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -18,6 +20,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
     paginationEnabled: false,
     security: "is_granted('ROLE_API_USER')"
 )]
+#[ApiFilter(LimitFilter::class)]
 class Tile
 {
     use TimestampableEntity;

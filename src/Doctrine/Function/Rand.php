@@ -15,7 +15,7 @@ use Doctrine\ORM\Query\SqlWalker;
 class Rand extends FunctionNode
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function parse(Parser $parser)
     {
@@ -25,7 +25,7 @@ class Rand extends FunctionNode
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSql(SqlWalker $sqlWalker)
     {
