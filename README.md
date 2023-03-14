@@ -27,3 +27,13 @@ Create an admin user:
 ```shell
 docker compose exec phpfpm bin/console app:user:add xxxx@aarhus.dk <password>
 ```
+
+## Production
+
+```shell
+idc up -d
+idc exec phpfpm composer install
+docker run --rm -v .:/app --workdir /app node:18 yarn install
+docker run --rm -v .:/app --workdir /app node:18 yarn build
+rm -rf node_modules
+```
