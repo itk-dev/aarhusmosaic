@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -15,6 +18,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
         new Get(),
         new GetCollection(),
     ],
+    paginationEnabled: false,
     security: "is_granted('ROLE_API_USER')"
 )]
 class Tile

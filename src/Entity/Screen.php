@@ -15,6 +15,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
         new Get(),
         new GetCollection(),
     ],
+    paginationEnabled: false,
     security: "is_granted('ROLE_API_USER')"
 )]
 class Screen
