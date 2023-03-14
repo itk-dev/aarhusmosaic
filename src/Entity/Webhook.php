@@ -79,11 +79,6 @@ final class Webhook
 
     public function getSubmissionURL(): string
     {
-        $url = $this->links['get_submission_url'];
-
-        // Hack to use when during local testing between containers.
-        // $url = str_replace('http://default', 'http://selvbetjening-nginx-1.frontend:8080', $url);
-
-        return $url;
+        return $this->links['get_submission_url'];
     }
 }
