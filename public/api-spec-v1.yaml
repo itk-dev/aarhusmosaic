@@ -39,20 +39,7 @@ paths:
                   $ref: '#/components/schemas/Screen'
       summary: 'Retrieves the collection of Screen resources.'
       description: 'Retrieves the collection of Screen resources.'
-      parameters:
-        -
-          name: page
-          in: query
-          description: 'The collection page number'
-          required: false
-          deprecated: false
-          allowEmptyValue: true
-          schema:
-            type: integer
-            default: 1
-          style: form
-          explode: false
-          allowReserved: false
+      parameters: []
       deprecated: false
     parameters: []
   '/v1/api/screens/{id}':
@@ -125,18 +112,18 @@ paths:
       description: 'Retrieves the collection of Tile resources.'
       parameters:
         -
-          name: page
+          name: limit
           in: query
-          description: 'The collection page number'
-          required: false
+          description: 'Limit number of results'
+          required: true
           deprecated: false
           allowEmptyValue: true
           schema:
-            type: integer
-            default: 1
+            type: string
           style: form
           explode: false
           allowReserved: false
+          example: '15'
       deprecated: false
     parameters: []
   '/v1/api/tiles/{id}':
@@ -204,13 +191,13 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Webhook.jsonld'
+              $ref: '#/components/schemas/Webhook.jsonld-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Webhook'
+              $ref: '#/components/schemas/Webhook-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Webhook'
+              $ref: '#/components/schemas/Webhook-write'
         required: true
       deprecated: false
     parameters: []
@@ -291,13 +278,9 @@ components:
         id:
           readOnly: true
           type: integer
-        title:
-          type: string
         description:
           type: string
         image:
-          type: string
-        remoteUrl:
           type: string
         mail:
           type: string
@@ -347,13 +330,9 @@ components:
         id:
           readOnly: true
           type: integer
-        title:
-          type: string
         description:
           type: string
         image:
-          type: string
-        remoteUrl:
           type: string
         mail:
           type: string
@@ -372,7 +351,7 @@ components:
         updatedAt:
           type: string
           format: date-time
-    Webhook:
+    Webhook-write:
       type: object
       description: ''
       deprecated: false
@@ -404,7 +383,7 @@ components:
           type: array
           items:
             type: string
-    Webhook.jsonld:
+    Webhook.jsonld-write:
       type: object
       description: ''
       deprecated: false
