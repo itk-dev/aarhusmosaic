@@ -3,147 +3,166 @@
 namespace App\Service;
 
 use App\Entity\Webhook;
-use Psr\Log\LoggerInterface;
+use App\Exception\InvalidDataException;
+use App\Exception\WebhookException;
+use ItkDev\MetricsBundle\Service\MetricsService;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-/**
- * @TODO: Fixed this service when OS2forms once more is installable.
- */
 class WebhookService
 {
     public function __construct(
+        private readonly string $projectDir,
         private readonly HttpClientInterface $client,
-        private readonly LoggerInterface $logger,
+        private readonly MetricsService $metricsService
     ) {
     }
 
-    public function getData(Webhook $message): array
-    {
-//        $this->logger->info('WebformSubmitHandler invoked.');
-//
-//        $submissionUrl = $message->getSubmissionUrl();
-//        $apiKeyUserId = $message->getApiKeyUserId();
-//
-//        $user = $this->apiKeyUserRepository->find($apiKeyUserId);
-//
-//        if (!$user) {
-//            throw new WebformSubmissionRetrievalException('ApiKeyUser not set.');
-//        }
-//
-//        $this->logger->info("Fetching $submissionUrl");
-//
-//        $submission = $this->getWebformSubmission($submissionUrl, $user->getWebformApiKey());
-//
-//        return $this->getValidatedData($submission);
-        return [];
-    }
-
-    public function getWebformSubmission(string $submissionUrl, string $webformApiKey): array
+    /**
+     * Get submission data (validated).
+     *
+     * Side-effect: image is downloaded.
+     *
+     * @param string $submissionUrl
+     *   The remote submission URL to fetch data from
+     * @param string $remoteApiKey
+     *   Remote API key to access submission data
+     *
+     * @return array
+     *   Validate data array that matches the webhook entity
+     *
+     * @throws InvalidDataException
+     * @throws TransportExceptionInterface
+     * @throws WebhookException
+     */
+    private function getSubmission(string $submissionUrl, string $remoteApiKey): array
     {
         try {
             $response = $this->client->request('GET', $submissionUrl, [
                 'headers' => [
-                    'api-key' => $webformApiKey,
+                    'api-key' => $remoteApiKey,
                 ],
             ]);
 
-            return $response->toArray();
-        } catch (\Exception $exception) {
-            // throw new WebformSubmissionRetrievalException($exception->getMessage(), $exception->getCode());
+            $data = $response->toArray();
+        } catch (ClientExceptionInterface|DecodingExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface|TransportExceptionInterface $exception) {
+            $this->metricsService->counter('webhook_download_failed_total', 'Webhook download failed counter', 1, ['type' => 'webhook']);
+
+            throw new WebhookException('Fail to fetch submission data', $exception->getCode(), $exception);
         }
 
-        return [];
+        $data = $this->validateAndTransformData($data['data'] ?? []);
+        $data['image'] = $this->downloadImage($data['image'], $remoteApiKey);
+
+        return $data;
     }
 
-    public function sortWebformSubmissionDataByType(array $webformSubmission): array
+    /**
+     * Download image form remote server (os2forms).
+     *
+     * @param string $url
+     *   URL to download image from
+     * @param string $remoteApiKey
+     *   Remote API key to access submission data
+     *
+     * @return string
+     *   The downloaded image path (destination)
+     *
+     * @throws WebhookException
+     * @throws TransportExceptionInterface
+     */
+    private function downloadImage(string $url, string $remoteApiKey): string
     {
-//        $sortedData = [
-//            'bookingData' => [],
-//            'stringData' => [],
-//            'arrayData' => [],
-//        ];
-//
-//        foreach ($webformSubmission['data'] as $key => $entry) {
-//            if (is_string($entry)) {
-//                try {
-//                    $data = json_decode(json: $entry, associative: true, flags: JSON_THROW_ON_ERROR);
-//                    if (is_array($data) && isset($data['formElement']) && 'booking_element' == $data['formElement']) {
-//                        $sortedData['bookingData'][$key] = $data;
-//                    } else {
-//                        $sortedData['stringData'][$key] = $entry;
-//                    }
-//                } catch (\Exception) {
-//                    $sortedData['stringData'][$key] = $entry;
-//                }
-//            } elseif (is_array($entry)) {
-//                $sortedData['arrayData'][$key] = $entry;
-//            }
-//        }
-//
-//        return $sortedData;
-        return [];
+        $response = $this->client->request('GET', $url, [
+            'headers' => [
+                'api-key' => $remoteApiKey,
+            ],
+        ]);
+
+        if (200 !== $response->getStatusCode()) {
+            $this->metricsService->counter('webhook_image_failed_total', 'Webhook download image failed counter', 1, ['type' => 'webhook']);
+
+            throw new WebhookException('Fail to fetch image (dode: '.$response->getStatusCode().')');
+        }
+
+        $uri = '/tiles/'.basename($url);
+        $dest = $this->projectDir.'/public'.$uri;
+        $fileHandler = fopen($dest, 'w');
+        foreach ($this->client->stream($response) as $chunk) {
+            fwrite($fileHandler, $chunk->getContent());
+        }
+
+        $this->metricsService->counter('webhook_image_completed_total', 'Webhook download image successful downloaded counter', 1, ['type' => 'webhook']);
+
+        return $uri;
     }
 
-    public function getValidatedData(array $webformSubmission): array
+    /**
+     * Validate and transform submission data into format matching webhook entity.
+     *
+     * @param array $data
+     *   Raw submission data
+     *
+     * @return array
+     *   Validate data array that matches the webhook entity
+     *
+     * @throws InvalidDataException
+     */
+    private function validateAndTransformData(array $data): array
     {
-//        if (empty($webformSubmission['data'])) {
-//            throw new WebformSubmissionRetrievalException('Webform data not set');
-//        }
-//
-//        $sortedData = $this->sortWebformSubmissionDataByType($webformSubmission);
-//        $acceptedSubmissions = [
-//            'bookingData' => [],
-//        ];
-//
-//        foreach ($sortedData['bookingData'] as $key => $entry) {
-//            if (!isset($entry['subject'])) {
-//                throw new WebformSubmissionRetrievalException("Webform ($key) subject not set");
-//            }
-//
-//            if (!isset($entry['resourceId'])) {
-//                throw new WebformSubmissionRetrievalException("Webform ($key) resourceId not set");
-//            }
-//
-//            if (!isset($entry['start'])) {
-//                throw new WebformSubmissionRetrievalException("Webform ($key) start not set");
-//            }
-//
-//            if (!isset($entry['end'])) {
-//                throw new WebformSubmissionRetrievalException("Webform ($key) end not set");
-//            }
-//
-//            if (!isset($entry['name'])) {
-//                throw new WebformSubmissionRetrievalException("Webform ($key) name not set");
-//            }
-//
-//            if (!isset($entry['email'])) {
-//                throw new WebformSubmissionRetrievalException("Webform ($key) email not set");
-//            }
-//
-//            if (!isset($entry['userId'])) {
-//                throw new WebformSubmissionRetrievalException("Webform ($key) userId not set");
-//            }
-//
-//            if (!isset($entry['userPermission'])) {
-//                throw new WebformSubmissionRetrievalException("Webform ($key) userPermission not set");
-//            }
-//
-//            $acceptedSubmissions['bookingData'][$key] = $entry;
-//        }
-//
-//        foreach ($sortedData['arrayData'] as $key => $entry) {
-//            $acceptedSubmissions['metaData'][$key] = implode(', ', $entry);
-//        }
-//
-//        foreach ($sortedData['stringData'] as $key => $entry) {
-//            $acceptedSubmissions['metaData'][$key] = $entry;
-//        }
-//
-//        if (0 == count($acceptedSubmissions['bookingData'])) {
-//            throw new WebformSubmissionRetrievalException('No submission data found.');
-//        }
-//
-//        return $acceptedSubmissions;
-        return [];
+        $output = [
+            'accepted' => false,
+            'extra' => [],
+        ];
+
+        // Check for required data (and fail fast by throwing exception thereby sending the message to failed queue).
+        $required = ['description', 'mail', 'image', 'tags'];
+        foreach ($required as $field) {
+            if (!isset($data[$field])) {
+                throw new InvalidDataException('Missing "'.$field.'" data in payload');
+            }
+
+            if ('image' === $field) {
+                $output['image'] = $data['linked']['image'][$data['image']]['url'];
+                unset($data['linked']);
+            } else {
+                $output[$field] = $data[$field];
+            }
+            unset($data[$field]);
+        }
+
+        // Move data left into extra field.
+        foreach ($data as $field => $datum) {
+            $data['extra'][$field] = $datum;
+        }
+
+        return $output;
+    }
+
+    /**
+     * Fetch data from remote server, transform and validate it.
+     *
+     * @param webhook $message
+     *   Webhook message with callback information
+     *
+     * @return array
+     *   Array with validate data
+     *
+     * @throws InvalidDataException
+     * @throws TransportExceptionInterface
+     * @throws WebhookException
+     */
+    public function getData(Webhook $message): array
+    {
+        $this->metricsService->counter('webhook_download_total', 'Webhook download called counter', 1, ['type' => 'webhook']);
+
+        $submissionUrl = $message->getSubmissionURL();
+        $remoteApiKey = $message->getRemoteApiKey();
+
+        return $this->getSubmission($submissionUrl, $remoteApiKey);
     }
 }
