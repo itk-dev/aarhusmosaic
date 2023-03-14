@@ -2,11 +2,10 @@
 
 namespace App\MessengerProcessor;
 
-use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use ApiPlatform\Symfony\Messenger\ContextStamp;
-use ApiPlatform\Symfony\Messenger\RemoveStamp;
+use App\Entity\ApiUser;
 use App\Entity\Webhook;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Messenger\Envelope;
@@ -21,6 +20,14 @@ class WebhookMessengerProcessor implements ProcessorInterface
     ) {
     }
 
+    /**
+     * Helper function to dispatch message.
+     *
+     * @param mixed $data
+     * @param array $context
+     *
+     * @return mixed
+     */
     private function persist(mixed $data, array $context = []): mixed
     {
         $envelope = $this->messageBus->dispatch(
@@ -36,21 +43,16 @@ class WebhookMessengerProcessor implements ProcessorInterface
         return $handledStamp->getResult();
     }
 
-    private function remove(mixed $data): void
-    {
-        $this->messageBus->dispatch((new Envelope($data))->with(new RemoveStamp()));
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): mixed
     {
+        /** @var ApiUser $user */
         $user = $this->security->getUser();
+
         /* @var Webhook $data */
         $data->setRemoteApiKey($user->getRemoteApiKey());
-        if ($operation instanceof DeleteOperationInterface) {
-            $this->remove($data);
-
-            return $data;
-        }
 
         return $this->persist($data, $context);
     }

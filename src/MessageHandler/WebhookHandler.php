@@ -8,7 +8,6 @@ use App\Service\WebhookService;
 use Doctrine\ORM\EntityManagerInterface;
 use ItkDev\MetricsBundle\Service\MetricsService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 
 #[AsMessageHandler]
 final class WebhookHandler
@@ -24,25 +23,20 @@ final class WebhookHandler
     {
         $this->metricsService->counter('webhook_called_total', 'Webhook called counter', 1, ['type' => 'webhook']);
 
+        // Throws exception that should not be caught, as not catching them will send the message into the failed queue
+        // for later debugging.
         $data = $this->webhookService->getData($message);
-        /**
-         * @TODO: User the webhook service to actually get data, when OS2Forms is installable once more.
-         */
-        $tile = new Tile();
-        $tile->setTitle($data['title'])
-            ->setDescription($data['description'])
-            ->setTags($data['tags'])
-            ->setMail($data['mail'])
-            ->setAccepted(false)
-            ->setExtra($data['extra'])
-            ->setImage('');
 
+        $tile = new Tile();
+        $tile->setDescription($data['description'])
+            ->setMail($data['mail'])
+            ->setImage($data['image'])
+            ->setTags($data['tags'])
+            ->setAccepted($data['accepted'])
+            ->setExtra($data['extra']);
         $this->em->persist($tile);
         $this->em->flush();
 
         $this->metricsService->counter('webhook_success_total', 'Webhook completed successful', 1, ['type' => 'webhook']);
     }
 }
-
-// throw new ReQueueMessageException('Cover store error - retry');
-// throw new UnrecoverableMessageHandlingException('Cover store invalid resource error');
