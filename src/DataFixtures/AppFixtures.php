@@ -10,12 +10,16 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * {@inheritDoc}
+     *
+     * @throws \JsonException
+     */
     public function load(ObjectManager $manager): void
     {
         // Tiles
         $json = \file_get_contents(__DIR__.'/data/tiles.json');
         $data = \json_decode($json, false, 512, JSON_THROW_ON_ERROR);
-
         foreach ($data as $datum) {
             // Copy image to public.
             $dest = __DIR__.'/../../public/tiles/'.basename($datum->image);
@@ -35,7 +39,6 @@ class AppFixtures extends Fixture
         // Screens
         $json = \file_get_contents(__DIR__.'/data/screen.json');
         $data = \json_decode($json, false, 512, JSON_THROW_ON_ERROR);
-
         foreach ($data as $datum) {
             $screen = new Screen();
             $screen->setTitle($datum->title)
@@ -48,7 +51,6 @@ class AppFixtures extends Fixture
         // API user
         $json = \file_get_contents(__DIR__.'/data/api_user.json');
         $data = \json_decode($json, false, 512, JSON_THROW_ON_ERROR);
-
         foreach ($data as $datum) {
             $api = new ApiUser();
             $api->setToken($datum->token)

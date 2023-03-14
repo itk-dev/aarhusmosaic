@@ -12,6 +12,9 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
+/**
+ * Webhook message processor that add the current logged in API user before creating message with the data.
+ */
 class WebhookMessengerProcessor implements ProcessorInterface
 {
     public function __construct(

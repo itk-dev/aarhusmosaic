@@ -81,8 +81,8 @@ final class Webhook
     {
         $url = $this->links['get_submission_url'];
 
-        // @TODO: Remove before live.
-        $url = str_replace('http://default', 'http://selvbetjening-nginx-1.frontend:8080', $url);
+        // Hack to use when during local testing between containers.
+        // $url = str_replace('http://default', 'http://selvbetjening-nginx-1.frontend:8080', $url);
 
         return $url;
     }
