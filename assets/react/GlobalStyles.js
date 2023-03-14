@@ -29,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
   */
   html, body {
     height: 100%;
+    overflow: hidden;
   }
 
   /*
@@ -102,7 +103,7 @@ const GlobalStyles = createGlobalStyle`
     /*
       Border
     */
-    --border-width: 5px;
+    --tile-border-width: ${Settings.tileBorderWidth}px;
 
 
     /*

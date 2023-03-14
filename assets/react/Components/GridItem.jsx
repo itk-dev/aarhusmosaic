@@ -1,30 +1,17 @@
 import React from "react";
 import styled from 'styled-components'
-import Icon from '../Icons/Icons';
+import Icon from './Icons/Icons';
 
-const GridItem = ({ variant, title, description, image, exposed }) => {
+const GridItem = ({ variant, description, image, exposed, tileIcons, tileBorders }) => {
   return (
     <Wrapper className={exposed ? "exposed" : ""}>
-      <Item className={variant} style={{ '--background-image': `url(${image}`}}>
-        {exposed ?
-          <>
-            {/* <ItemTitle>{title}</ItemTitle> */}
-            <ItemDescription>{description}</ItemDescription>
-          </>
-          :
-          <></>
-        }
-        <ItemIcon src={Icon[variant]} alt=""/>
+      <Item className={variant} style={{ '--background-image': `url(${image}`, '--border-width': tileBorders ? 'var(--tile-border-width)' : 0  }}>
+        {exposed && <ItemDescription>{description}</ItemDescription>}
+        {tileIcons && <ItemIcon src={Icon[variant]} alt=""/>}
       </Item>
     </Wrapper>
   );
 }
-
-// const ItemTitle = styled.h2`
-//   font-size: var(--font-size-h2);
-//   font-weight: var(--font-weight-h2);
-//   color: white;
-// `
 
 const ItemDescription = styled.p`
   font-size: var(--font-size-h2);
