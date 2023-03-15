@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\ApiUser;
 use App\Entity\Screen;
+use App\Entity\Tags;
 use App\Entity\Tile;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -41,6 +42,7 @@ class AdminDashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Tiles', 'fas fa-image', Tile::class);
+        yield MenuItem::linkToCrud('Tags', 'fas fa-tag', Tags::class);
         yield MenuItem::linkToCrud('Screens', 'fas fa-display', Screen::class);
         yield MenuItem::linkToCrud('API Users', 'fas fa-user-pen', ApiUser::class);
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
