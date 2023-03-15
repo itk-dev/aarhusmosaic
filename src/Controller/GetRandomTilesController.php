@@ -10,6 +10,8 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 #[AsController]
 class GetRandomTilesController extends AbstractController
 {
+    private const MAX_ALLOWED_RESULTS = 100;
+
     public function __construct(
         private readonly TileRepository $tileRepository,
     ) {
@@ -17,7 +19,8 @@ class GetRandomTilesController extends AbstractController
 
     public function __invoke(Request $request)
     {
-        $limit = $request->query->get('limit');
+        $limit = (int) $request->query->get('limit');
+        $limit = min(self::MAX_ALLOWED_RESULTS, $limit);
 
         return $this->tileRepository->getRandomTiles($limit);
     }

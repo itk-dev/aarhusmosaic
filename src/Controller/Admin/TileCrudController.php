@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Tile;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CodeEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -26,7 +27,7 @@ class TileCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('description'),
             ImageField::new('image')->setUploadDir('/public/tiles'),
-            ArrayField::new('tags')->hideOnIndex(),
+            AssociationField::new('tags')->hideOnIndex(),
             EmailField::new('mail'),
             BooleanField::new('accepted'),
             CodeEditorField::new('extra')->hideOnIndex(),

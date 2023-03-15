@@ -31,9 +31,13 @@ final class WebhookHandler
         $tile->setDescription($data['description'])
             ->setMail($data['mail'])
             ->setImage($data['image'])
-            ->setTags($data['tags'])
             ->setAccepted($data['accepted'])
             ->setExtra($data['extra']);
+
+        foreach ($data['tags'] as $tag) {
+            $tile->addTag($tag);
+        }
+
         $this->em->persist($tile);
         $this->em->flush();
 
