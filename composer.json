@@ -13,6 +13,7 @@
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/orm": "^2.14",
         "easycorp/easyadmin-bundle": "^4.6",
         "itk-dev/metrics-bundle": "^1.0",
@@ -109,7 +110,6 @@
         }
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.14",
         "psalm/plugin-symfony": "^5.0",
         "symfony/maker-bundle": "^1.48",
