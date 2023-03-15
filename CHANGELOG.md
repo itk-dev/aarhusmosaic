@@ -22,3 +22,5 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Added react app
 - Added fixtures
 - Download content from OS2Forms in webhook
+- Filter Tile by accepted in API
+- Randomize Tile in API
