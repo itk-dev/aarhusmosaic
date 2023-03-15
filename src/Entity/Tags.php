@@ -39,8 +39,9 @@ class Tags
         $this->tiles = new ArrayCollection();
     }
 
-    public function __toString() {
-        return $this->tag;
+    public function __toString(): string
+    {
+        return $this->tag ?? '';
     }
 
     public function getId(): ?int

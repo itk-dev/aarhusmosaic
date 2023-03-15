@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -16,7 +18,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: TileRepository::class)]
 #[ApiResource(
     operations: [
-        new Get(priority: 10),
+        new Get(
+            priority: 10
+        ),
         new GetCollection(
             uriTemplate: '/tiles/random',
             controller: GetRandomTilesController::class,
@@ -44,6 +48,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     paginationEnabled: true,
     security: "is_granted('ROLE_API_USER')"
 )]
+#[ApiFilter(OrderFilter::class, properties: ['updatedAt', 'name'], arguments: ['orderParameterName' => 'order'])]
 class Tile
 {
     use TimestampableEntity;
