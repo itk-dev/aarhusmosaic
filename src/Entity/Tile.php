@@ -30,7 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
                         'name' => 'limit',
                         'type' => 'int',
                         'in' => 'query',
-                        'required' => false,
+                        'required' => true,
                         'description' => 'Limit number of results (Max Tiles returned is 100)',
                         'example' => '15',
                     ],
