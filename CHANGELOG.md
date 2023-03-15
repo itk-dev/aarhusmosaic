@@ -24,3 +24,6 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Download content from OS2Forms in webhook
 - Filter Tile by accepted in API
 - Randomize Tile in API
+- Fixed route with limit and random tiles (to get limit to work with random custom controller with pagination from doctrine)
+- Changed tags to ManyToMany relation from json
+-Update fixtures and admin to match new tags
