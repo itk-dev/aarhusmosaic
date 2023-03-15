@@ -31,7 +31,7 @@ class AcceptedTileExtension implements QueryCollectionExtensionInterface, QueryI
     }
 
     /**
-     * Filter out Tile that has not yet been marked as accepted.
+     * Filter out Tile(s) that have not been marked as accepted.
      *
      * @param queryBuilder $queryBuilder
      *   The query builder for the current query

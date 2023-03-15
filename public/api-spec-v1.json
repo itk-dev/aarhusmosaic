@@ -318,7 +318,7 @@
                     {
                         "name": "limit",
                         "in": "query",
-                        "description": "Limit number of results",
+                        "description": "Limit number of results (Max Tiles returned is 100)",
                         "required": true,
                         "deprecated": false,
                         "allowEmptyValue": true,
