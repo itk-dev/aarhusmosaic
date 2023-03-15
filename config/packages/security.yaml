@@ -21,7 +21,7 @@ security:
             security: false
 
         api:
-            pattern: ^/v1/api
+            pattern: ^/api/v1
             stateless: true
             provider: api_user_provider
             access_token:

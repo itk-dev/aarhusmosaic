@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Tile;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,28 +40,31 @@ class TileRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Tile[] Returns an array of Tile objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Get random Tiles.
+     *
+     * @param int $limit
+     *   Max number of Tiles to fetch
+     *
+     * @return array
+     *   Well Tiles
+     */
+    public function getRandomTiles(int $limit): array
+    {
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->addSelect('RAND() as HIDDEN rand')->orderBy('rand');
 
-//    public function findOneBySomeField($value): ?Tile
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $query = $this->getEntityManager()
+            ->createQuery($queryBuilder->getDQL())
+            ->setFirstResult(0)
+            ->setMaxResults($limit);
+        $paginator = new Paginator($query, $fetchJoinCollection = true);
+
+        $tiles = [];
+        foreach ($paginator as $tile) {
+            $tiles[] = $tile;
+        }
+
+        return $tiles;
+    }
 }
