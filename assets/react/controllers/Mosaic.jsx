@@ -1,66 +1,117 @@
-import React, { useEffect, useState } from "react";
-
+import React, {useEffect, useState} from "react";
 import GlobalStyles from '../GlobalStyles';
 import GridItem from '../Components/GridItem';
 import Logo from "../Components/Logo";
 import Grid from "../Components/Grid";
-import { Data } from '../Data/demoData';
-import { Settings } from '../Data/settings';
-import PropTypes from "prop-types";
+import LoaderSrc from "../assets/loader.svg";
 
-function Mosaic({exampleProp}) {
-  const [randomExpose, setRandomExpose] = useState(1);
+function Mosaic() {
+    const TILES_LOADING_INTERVAL = 60 * 1000 * 5;
 
-  useEffect(() => {
-      // TODO: Remove.
-      console.log('exampleProp', exampleProp)
+    const [screen, setScreen] = useState(null);
+    const [config, setConfig] = useState(null);
+    const [tiles, setTiles] = useState([]);
+    const [randomExpose, setRandomExpose] = useState(1);
 
-      // TODO: Fix animation. It only works the first time.
-      const timer = setInterval(() => {
-          setRandomExpose(Math.floor(1 + Math.random() * (Data.length - 1)));
-      }, 5000);
+    const loadScreen = () => {
+        // TODO: Get access token and id 1.
+        fetch('/api/v1/screens/1', {
+            headers: {
+                authorization: "Bearer 123456789"
+            }
+        }).then((resp) => resp.json()).then((data) => setScreen(data));
+    }
 
-      // Unmount.
-      return () => {
-          clearInterval(timer);
-      }
-  }, []);
+    const loadTiles = (numberOfTiles) => {
+        // TODO: Get access token.
+        fetch(`/api/v1/tiles/random?page=1&limit=${numberOfTiles}`, {
+            headers: {
+                authorization: "Bearer 123456789"
+            }
+        }).then((resp) => resp.json()).then((data) => {
+            const loadedTiles = [...data['hydra:member']];
+            setTiles(loadedTiles.map((tile) => {
+                tile.extra = JSON.parse(tile.extra);
+                return tile;
+            }));
+        });
+    }
 
-  return (
-      <div className="App">
-          <Grid style={{ '--grid-columns': Settings.columns, '--grid-rows': Settings.rows, }}>
+    useEffect(() => {
+        loadScreen();
 
-              {/* TODO: Randomize images. Load a new batch of tiles after 5(Many configurable) exposes? */}
-              {Data.map((item, index) => (
-                  <GridItem
-                      key={index}
-                      variant={item.variant}
-                      description={item.description}
-                      image={item.image}
-                      showIcons={Settings.showIcons}
-                      showBorders={Settings.showBorders}
-                  />
-              ))}
-          </Grid>
+        setInterval(loadTiles, TILES_LOADING_INTERVAL);
+    }, []);
 
-          <GridItem
-              variant={Data[randomExpose].variant}
-              description={Data[randomExpose].description}
-              image={Data[randomExpose].image}
-              exposed
-              tileIcons={Settings.exposeIcon}
-              tileBorders={Settings.exposeBorder}
-          />
+    useEffect(() => {
+        if (screen === null) {
+            return;
+        }
 
-          {Settings.mosaicLogo && <Logo />}
+        const numberOfTiles = screen.gridColumns * screen.gridRows;
 
-          <GlobalStyles />
-      </div>
-  );
-}
+        setConfig({
+            gridColumns: screen.gridColumns ?? 6,
+            gridRows: screen.gridRows ?? 5,
+            numberOfTiles,
+            variant: JSON.parse(screen.variant),
+        });
 
-Mosaic.propTypes = {
-    exampleProp: PropTypes.string.isRequired,
+        loadTiles(numberOfTiles);
+    }, [screen]);
+
+    useEffect(() => {
+        if (tiles.length === 0) {
+            return;
+        }
+
+        const timer = setInterval(() => {
+            setRandomExpose(Math.floor(1 + Math.random() * (tiles.length - 1)));
+        }, config?.variant?.exposeTimeout ? config.variant.exposeTimeout * 1000  : 5000);
+
+        // Unmount.
+        return () => {
+            clearInterval(timer);
+        }
+    }, [tiles]);
+
+    return (<>
+            {!config && (
+                <div style={{position: "absolute", flexFlow: "wrap", width: "100%", height: "100%", display: "flex", justifyContent: "center", alignContent: "center", background: "rgb(241, 242, 243)"}}>
+                    <img alt="loader" src={LoaderSrc} style={{height: "33%"}} />
+                </div>
+            )}
+            {config && tiles.length > 0 && (
+                <div className="App">
+                    <Grid style={{'--grid-columns': config.gridColumns, '--grid-rows': config.gridRows,}}>
+                        {tiles.map((item, index) => (
+                            <GridItem
+                                key={index}
+                                variant={item?.extra?.variant}
+                                description={item.description}
+                                image={item.image}
+                                showIcons={config?.variant?.showIcons ?? false}
+                                showBorders={config?.variant?.showBorders ?? false}
+                            />
+                        ))}
+                    </Grid>
+
+                    <GridItem
+                        variant={tiles[randomExpose].variant}
+                        description={tiles[randomExpose].description}
+                        image={tiles[randomExpose].image}
+                        exposed
+                        showIcons={config?.variant?.exposeShowIcon ?? false}
+                        showBorders={config?.variant?.exposeShowBorder ?? false}
+                    />
+
+                    {config?.variant?.mosaicLogo && <Logo/>}
+
+                    <GlobalStyles config={config}/>
+                </div>
+            )}
+        </>
+    );
 }
 
 export default Mosaic;

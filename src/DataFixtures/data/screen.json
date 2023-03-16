@@ -5,7 +5,13 @@
     "gridColumns": 5,
     "gridRows": 6,
     "variant": {
-      "icons": true
+      "showIcons": true,
+      "showBorders": true,
+      "gridExpose": 3,
+      "exposeShowBorder": true,
+      "exposeShowIcon": true,
+      "mosaicLogo": true,
+      "exposeTimeout": 7
     }
   },
   {
@@ -14,7 +20,13 @@
     "gridColumns": 4,
     "gridRows": 6,
     "variant": {
-      "icons": false
+      "showIcons": true,
+      "showBorders": true,
+      "gridExpose": 2,
+      "exposeShowBorder": true,
+      "exposeShowIcon": true,
+      "mosaicLogo": false,
+      "exposeTimeout": 5
     }
   },
   {
@@ -23,7 +35,13 @@
     "gridColumns": 8,
     "gridRows": 8,
     "variant": {
-      "icons": true
+      "showIcons": true,
+      "showBorders": true,
+      "gridExpose": 2,
+      "exposeShowBorder": false,
+      "exposeShowIcon": false,
+      "mosaicLogo": true,
+      "exposeTimeout": 5
     }
   },
   {
@@ -32,7 +50,13 @@
     "gridColumns": 6,
     "gridRows": 6,
     "variant": {
-      "icons": false
+      "showIcons": true,
+      "showBorders": true,
+      "gridExpose": 4,
+      "exposeShowBorder": true,
+      "exposeShowIcon": true,
+      "mosaicLogo": false,
+      "exposeTimeout": 10
     }
   }
 ]
