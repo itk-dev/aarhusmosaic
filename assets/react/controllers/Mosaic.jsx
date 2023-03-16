@@ -155,7 +155,7 @@ function Mosaic() {
                         {exposedTile &&
                             <CSSTransition
                                 key={exposedTile['@id']}
-                                timeout={1000}
+                                timeout={1200}
                                 classNames="exposed-tile"
                                 nodeRef={nodeRefs[exposedTile['@id']]}
                             >
