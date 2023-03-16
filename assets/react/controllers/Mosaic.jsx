@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {createRef, useEffect, useState} from "react";
 import GlobalStyles from '../global-styles';
 import GridItem from '../components/grid-item';
 import Logo from "../components/logo";
 import Grid from "../components/grid";
 import LoaderSrc from "../assets/icons/loader.svg";
 import {CenteredContent} from "../components/centered-content";
+import {TransitionGroup, CSSTransition} from "react-transition-group";
 
 function Mosaic() {
     const TILES_LOADING_INTERVAL = 60 * 1000 * 5;
@@ -15,6 +16,7 @@ function Mosaic() {
     const [tiles, setTiles] = useState([]);
     const [randomExpose, setRandomExpose] = useState(1);
     const [errorMessage, setErrorMessage] = useState(null);
+    const [nodeRefs, setNodeRefs] = useState({});
 
     const loadScreen = () => {
         fetch(`/api/v1/screens/${params.id}`, {
@@ -108,6 +110,14 @@ function Mosaic() {
             setRandomExpose(Math.floor(Math.random() * (tiles.length - 1)));
         }, config?.variant?.exposeTimeout ? config.variant.exposeTimeout * 1000 : 5000);
 
+        // Add or remove refs.
+        setNodeRefs((prevNodeRefs) =>
+            tiles.reduce((result, element) => {
+                result[element['@id']] = prevNodeRefs[element['@id']] || createRef();
+                return result;
+            }, {})
+        );
+
         // Unmount.
         return () => {
             clearInterval(timer);
@@ -141,16 +151,26 @@ function Mosaic() {
                         ))}
                     </Grid>
 
-                    {exposedTile &&
-                        <GridItem
-                            variant={exposedTile?.extra?.variant}
-                            description={exposedTile.description}
-                            image={exposedTile.image}
-                            exposed
-                            tileIcons={config.variant.exposeShowIcon ?? false}
-                            tileBorders={config.variant.exposeShowBorder ?? false}
-                        />
-                    }
+                    <TransitionGroup component={null}>
+                        {exposedTile &&
+                            <CSSTransition
+                                key={exposedTile['@id']}
+                                timeout={1000}
+                                classNames="exposed-tile"
+                                nodeRef={nodeRefs[exposedTile['@id']]}
+                            >
+                                <GridItem
+                                    variant={exposedTile?.extra?.variant}
+                                    description={exposedTile.description}
+                                    image={exposedTile.image}
+                                    exposed
+                                    tileIcons={config.variant.exposeShowIcon ?? false}
+                                    tileBorders={config.variant.exposeShowBorder ?? false}
+                                    forwardRef={nodeRefs[exposedTile['@id']]}
+                                />
+                            </CSSTransition>
+                        }
+                    </TransitionGroup>
 
                     {config?.variant?.mosaicLogo && <Logo/>}
 
