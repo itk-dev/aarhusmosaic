@@ -4,44 +4,81 @@ import GridItem from '../Components/GridItem';
 import Logo from "../Components/Logo";
 import Grid from "../Components/Grid";
 import LoaderSrc from "../assets/loader.svg";
+import {CenteredContent} from "../components/CenteredContent";
 
 function Mosaic() {
     const TILES_LOADING_INTERVAL = 60 * 1000 * 5;
 
+    const [params, setParams] = useState(null);
     const [screen, setScreen] = useState(null);
     const [config, setConfig] = useState(null);
     const [tiles, setTiles] = useState([]);
     const [randomExpose, setRandomExpose] = useState(1);
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const loadScreen = () => {
-        // TODO: Get access token and id 1.
-        fetch('/api/v1/screens/1', {
+        fetch(`/api/v1/screens/${params.id}`, {
             headers: {
-                authorization: "Bearer 123456789"
+                authorization: `Bearer ${params.key}`
             }
-        }).then((resp) => resp.json()).then((data) => setScreen(data));
+        })
+            .then((resp) => {
+                if (!resp.ok) {
+                    throw new Error("Could not fetch screen config");
+                }
+
+                return resp.json();
+            })
+            .then((data) => setScreen(data))
+            .catch((err) => {
+                setErrorMessage(err.message);
+            });
     }
 
     const loadTiles = (numberOfTiles) => {
-        // TODO: Get access token.
         fetch(`/api/v1/tiles/random?page=1&limit=${numberOfTiles}`, {
             headers: {
-                authorization: "Bearer 123456789"
+                authorization: `Bearer ${params.key}`
             }
-        }).then((resp) => resp.json()).then((data) => {
-            const loadedTiles = [...data['hydra:member']];
-            setTiles(loadedTiles.map((tile) => {
-                tile.extra = JSON.parse(tile.extra);
-                return tile;
-            }));
-        });
+        })
+            .then((resp) => {
+                if (!resp.ok) {
+                    throw new Error("Could not fetch tiles");
+                }
+
+                return resp.json();
+            })
+            .then((data) => {
+                const loadedTiles = [...data['hydra:member']];
+                setTiles(loadedTiles.map((tile) => {
+                    tile.extra = JSON.parse(tile.extra);
+                    return tile;
+                }));
+            })
+            .catch((err) => {
+                setErrorMessage(err.message);
+            });
     }
 
     useEffect(() => {
-        loadScreen();
+        const url = new URL(window.location.href);
+        const id = url.searchParams.get('id');
+        const key = url.searchParams.get('key');
 
-        setInterval(loadTiles, TILES_LOADING_INTERVAL);
+        if (id === null || key === null) {
+            setErrorMessage("Id and/or key are not set.")
+        } else {
+            setParams({id, key});
+        }
     }, []);
+
+    useEffect(() => {
+        if (params === null) {
+            return;
+        }
+
+        loadScreen();
+    }, [params]);
 
     useEffect(() => {
         if (screen === null) {
@@ -58,6 +95,8 @@ function Mosaic() {
         });
 
         loadTiles(numberOfTiles);
+
+        setInterval(loadTiles, TILES_LOADING_INTERVAL);
     }, [screen]);
 
     useEffect(() => {
@@ -66,8 +105,8 @@ function Mosaic() {
         }
 
         const timer = setInterval(() => {
-            setRandomExpose(Math.floor(1 + Math.random() * (tiles.length - 1)));
-        }, config?.variant?.exposeTimeout ? config.variant.exposeTimeout * 1000  : 5000);
+            setRandomExpose(Math.floor(Math.random() * (tiles.length - 1)));
+        }, config?.variant?.exposeTimeout ? config.variant.exposeTimeout * 1000 : 5000);
 
         // Unmount.
         return () => {
@@ -76,22 +115,25 @@ function Mosaic() {
     }, [tiles]);
 
     return (<>
-            {!config && (
-                <div style={{position: "absolute", flexFlow: "wrap", width: "100%", height: "100%", display: "flex", justifyContent: "center", alignContent: "center", background: "rgb(241, 242, 243)"}}>
-                    <img alt="loader" src={LoaderSrc} style={{height: "33%"}} />
-                </div>
+            {errorMessage && (
+                <CenteredContent>Error: {errorMessage}</CenteredContent>
             )}
-            {config && tiles.length > 0 && (
+            {!errorMessage && !config && (
+                <CenteredContent>
+                    <img alt="loader" src={LoaderSrc} style={{height: "33%"}}/>
+                </CenteredContent>
+            )}
+            {!errorMessage && config && tiles.length > 0 && (
                 <div className="App">
                     <Grid style={{'--grid-columns': config.gridColumns, '--grid-rows': config.gridRows,}}>
-                        {tiles.map((item, index) => (
+                        {tiles.map((item) => (
                             <GridItem
-                                key={index}
+                                key={item['@id']}
                                 variant={item?.extra?.variant}
                                 description={item.description}
                                 image={item.image}
-                                showIcons={config?.variant?.showIcons ?? false}
-                                showBorders={config?.variant?.showBorders ?? false}
+                                showIcons={config.variant.showIcons ?? false}
+                                showBorders={config.variant.showBorders ?? false}
                             />
                         ))}
                     </Grid>
@@ -101,8 +143,8 @@ function Mosaic() {
                         description={tiles[randomExpose].description}
                         image={tiles[randomExpose].image}
                         exposed
-                        showIcons={config?.variant?.exposeShowIcon ?? false}
-                        showBorders={config?.variant?.exposeShowBorder ?? false}
+                        showIcons={config.variant.exposeShowIcon ?? false}
+                        showBorders={config.variant.exposeShowBorder ?? false}
                     />
 
                     {config?.variant?.mosaicLogo && <Logo/>}
