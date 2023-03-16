@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components'
 
-const Grid = (props) => {
+function Grid(props) {
   return (
     <Wrapper {...props}>
       {props.children}

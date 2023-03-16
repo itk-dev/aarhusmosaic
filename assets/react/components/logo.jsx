@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components'
 import Icon from './icon';
 
-const Logo = () => {
+function Logo() {
   return (
     <LogoImg src={Icon.verdensmaal} alt=""/>
   );

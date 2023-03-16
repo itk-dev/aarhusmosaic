@@ -2,12 +2,10 @@ import { createGlobalStyle } from 'styled-components';
 import "@fontsource/inter/700.css";
 
 const GlobalStyles = createGlobalStyle`
-
   /*
   * Josh Comeau Global Styles
   * From his css-for-js course: https://courses.joshwcomeau.com/css-for-js/treasure-trove/010-global-styles
   */
-
 
   /*
     1. Use a more-intuitive box-sizing model.
@@ -80,8 +78,8 @@ const GlobalStyles = createGlobalStyle`
     /*
       Grid settings
     */
-    --grid-columns: ${props => props.config.gridColumns ?? 6};
-    --grid-rows: ${props => props.config.gridRows ?? 5};
+    --grid-columns: ${props => props.config.gridColumns};
+    --grid-rows: ${props => props.config.gridRows};
     --grid-expose: ${props => props.config.variant.gridExpose ?? 3};
 
     /*

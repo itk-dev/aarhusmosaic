@@ -1,17 +1,30 @@
 import React from "react";
 import styled from 'styled-components'
 import Icon from './icon';
+import PropTypes from "prop-types";
 
-const GridItem = ({ variant, description, image, exposed, showIcons, showBorders }) => {
-  return (
-    <Wrapper className={exposed ? "exposed" : ""}>
-      <Item className={variant} style={{ '--background-image': `url(${image}`, '--border-width': showBorders ? 'var(--tile-border-width)' : 0  }}>
-        {exposed && <ItemDescription>{description}</ItemDescription>}
-        {showIcons && <ItemIcon src={Icon[variant]} alt=""/>}
-      </Item>
-    </Wrapper>
-  );
+function GridItem({variant, description, image, exposed, tileIcons, tileBorders}) {
+    return (
+        <Wrapper className={exposed ? "exposed" : ""}>
+            <Item className={variant} style={{
+                '--background-image': `url(${image}`,
+                '--border-width': tileBorders ? 'var(--tile-border-width)' : 0
+            }}>
+                {exposed && <ItemDescription>{description}</ItemDescription>}
+                {tileIcons && <ItemIcon src={Icon[variant]} alt=""/>}
+            </Item>
+        </Wrapper>
+    );
 }
+
+GridItem.propTypes = {
+    variant: PropTypes.string,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    exposed: PropTypes.bool,
+    tileIcons: PropTypes.bool,
+    tileBorders: PropTypes.bool,
+};
 
 const ItemDescription = styled.p`
   font-size: var(--font-size-h2);
@@ -62,6 +75,7 @@ const Item = styled.div`
 
   &.one {
     border-color: var(--color-one);
+
     &::before {
       background-color: var(--color-one);
     }
@@ -69,6 +83,7 @@ const Item = styled.div`
 
   &.two {
     border-color: var(--color-two);
+
     &::before {
       background-color: var(--color-two);
     }
@@ -76,6 +91,7 @@ const Item = styled.div`
 
   &.tree {
     border-color: var(--color-tree);
+
     &::before {
       background-color: var(--color-tree);
     }
@@ -83,6 +99,7 @@ const Item = styled.div`
 
   &.four {
     border-color: var(--color-four);
+
     &::before {
       background-color: var(--color-four);
     }
@@ -90,6 +107,7 @@ const Item = styled.div`
 
   &.five {
     border-color: var(--color-five);
+
     &::before {
       background-color: var(--color-five);
     }
@@ -97,6 +115,7 @@ const Item = styled.div`
 
   &.six {
     border-color: var(--color-six);
+
     &::before {
       background-color: var(--color-six);
     }
@@ -104,6 +123,7 @@ const Item = styled.div`
 
   &.seven {
     border-color: var(--color-seven);
+
     &::before {
       background-color: var(--color-seven);
     }
@@ -111,6 +131,7 @@ const Item = styled.div`
 
   &.eight {
     border-color: var(--color-eight);
+
     &::before {
       background-color: var(--color-eight);
     }
@@ -118,6 +139,7 @@ const Item = styled.div`
 
   &.nine {
     border-color: var(--color-nine);
+
     &::before {
       background-color: var(--color-nine);
     }
@@ -125,6 +147,7 @@ const Item = styled.div`
 
   &.ten {
     border-color: var(--color-ten);
+
     &::before {
       background-color: var(--color-ten);
     }
@@ -132,6 +155,7 @@ const Item = styled.div`
 
   &.eleven {
     border-color: var(--color-eleven);
+
     &::before {
       background-color: var(--color-eleven);
     }
@@ -139,6 +163,7 @@ const Item = styled.div`
 
   &.twelve {
     border-color: var(--color-twelve);
+
     &::before {
       background-color: var(--color-twelve);
     }
@@ -146,6 +171,7 @@ const Item = styled.div`
 
   &.thirteen {
     border-color: var(--color-thirteen);
+
     &::before {
       background-color: var(--color-thirteen);
     }
@@ -153,6 +179,7 @@ const Item = styled.div`
 
   &.fourteen {
     border-color: var(--color-fourteen);
+
     &::before {
       background-color: var(--color-fourteen);
     }
@@ -160,6 +187,7 @@ const Item = styled.div`
 
   &.fifteen {
     border-color: var(--color-fifteen);
+
     &::before {
       background-color: var(--color-fifteen);
     }
@@ -167,14 +195,15 @@ const Item = styled.div`
 
   &.sixteen {
     border-color: var(--color-sixteen);
+
     &::before {
       background-color: var(--color-sixteen);
     }
   }
 
-  .exposed &{
+  .exposed & {
     width: calc((100vw / var(--grid-columns)) * var(--grid-expose));
-    height: calc((100vh / var(--grid-rows)) *  var(--grid-expose));
+    height: calc((100vh / var(--grid-rows)) * var(--grid-expose));
     animation: expose;
     animation-duration: 1.2s;
     transform-origin: bottom;

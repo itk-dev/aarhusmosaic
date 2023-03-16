@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import GlobalStyles from '../GlobalStyles';
-import GridItem from '../Components/GridItem';
-import Logo from "../Components/Logo";
-import Grid from "../Components/Grid";
-import LoaderSrc from "../assets/loader.svg";
-import {CenteredContent} from "../components/CenteredContent";
+import GlobalStyles from '../global-styles';
+import GridItem from '../components/grid-item';
+import Logo from "../components/logo";
+import Grid from "../components/grid";
+import LoaderSrc from "../assets/icons/loader.svg";
+import {CenteredContent} from "../components/centered-content";
 
 function Mosaic() {
     const TILES_LOADING_INTERVAL = 60 * 1000 * 5;
@@ -114,7 +114,10 @@ function Mosaic() {
         }
     }, [tiles]);
 
-    return (<>
+    const exposedTile = tiles[randomExpose] ?? null;
+
+    return (
+        <>
             {errorMessage && (
                 <CenteredContent>Error: {errorMessage}</CenteredContent>
             )}
@@ -125,27 +128,29 @@ function Mosaic() {
             )}
             {!errorMessage && config && tiles.length > 0 && (
                 <div className="App">
-                    <Grid style={{'--grid-columns': config.gridColumns, '--grid-rows': config.gridRows,}}>
-                        {tiles.map((item) => (
+                    <Grid style={{'--grid-columns': config.gridColumns, '--grid-rows': config.gridRows}}>
+                        {tiles.map((tile) => (
                             <GridItem
-                                key={item['@id']}
-                                variant={item?.extra?.variant}
-                                description={item.description}
-                                image={item.image}
-                                showIcons={config.variant.showIcons ?? false}
-                                showBorders={config.variant.showBorders ?? false}
+                                key={tile['@id']}
+                                variant={tile?.extra?.variant}
+                                description={tile.description}
+                                image={tile.image}
+                                tileIcons={config.variant.showIcons ?? false}
+                                tileBorders={config.variant.showBorders ?? false}
                             />
                         ))}
                     </Grid>
 
-                    <GridItem
-                        variant={tiles[randomExpose].variant}
-                        description={tiles[randomExpose].description}
-                        image={tiles[randomExpose].image}
-                        exposed
-                        showIcons={config.variant.exposeShowIcon ?? false}
-                        showBorders={config.variant.exposeShowBorder ?? false}
-                    />
+                    {exposedTile &&
+                        <GridItem
+                            variant={exposedTile?.extra?.variant}
+                            description={exposedTile.description}
+                            image={exposedTile.image}
+                            exposed
+                            tileIcons={config.variant.exposeShowIcon ?? false}
+                            tileBorders={config.variant.exposeShowBorder ?? false}
+                        />
+                    }
 
                     {config?.variant?.mosaicLogo && <Logo/>}
 
