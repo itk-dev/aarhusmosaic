@@ -101,7 +101,7 @@ const GlobalStyles = createGlobalStyle`
       Border
     */
     --tile-border-width: ${props => props.config.variant.tileBorderWidth ?? 5}px;
-
+    --border-width: var(--tile-border-width);
 
     /*
       Colors
@@ -134,7 +134,6 @@ const GlobalStyles = createGlobalStyle`
       Logo
     */
     --logo-background: var(--color-white);
-
   }
 
   @keyframes expose {
