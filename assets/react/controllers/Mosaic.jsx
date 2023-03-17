@@ -37,15 +37,17 @@ function Mosaic() {
             });
     }
 
-    const loadTiles = (numberOfTiles) => {
-        fetch(`/api/v1/tiles/random?page=1&limit=${numberOfTiles}`, {
+    const loadTiles = () => {
+        const errorMessageFailedToFetch = "Could not fetch tiles";
+
+        fetch(`/api/v1/tiles/random?page=1&limit=${config.numberOfTiles}`, {
             headers: {
                 authorization: `Bearer ${params.key}`
             }
         })
             .then((resp) => {
                 if (!resp.ok) {
-                    throw new Error("Could not fetch tiles");
+                    throw new Error(errorMessageFailedToFetch);
                 }
 
                 return resp.json();
@@ -56,9 +58,15 @@ function Mosaic() {
                     tile.extra = JSON.parse(tile.extra);
                     return tile;
                 }));
+
+                if (errorMessage === errorMessageFailedToFetch) {
+                    setErrorMessage(null);
+                }
             })
             .catch((err) => {
-                setErrorMessage(err.message);
+                if (tiles.length === 0) {
+                    setErrorMessage(err.message);
+                }
             });
     }
 
@@ -95,11 +103,17 @@ function Mosaic() {
             numberOfTiles,
             variant: JSON.parse(screen.variant),
         });
+    }, [screen]);
 
-        loadTiles(numberOfTiles);
+    useEffect(() => {
+        if (config === null) {
+            return;
+        }
+
+        loadTiles();
 
         setInterval(loadTiles, TILES_LOADING_INTERVAL);
-    }, [screen]);
+    }, [config]);
 
     useEffect(() => {
         if (tiles.length === 0) {
