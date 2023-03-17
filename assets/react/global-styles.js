@@ -1,14 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
-import { Settings } from './Data/settings';
 import "@fontsource/inter/700.css";
 
 const GlobalStyles = createGlobalStyle`
-
   /*
   * Josh Comeau Global Styles
   * From his css-for-js course: https://courses.joshwcomeau.com/css-for-js/treasure-trove/010-global-styles
   */
-
 
   /*
     1. Use a more-intuitive box-sizing model.
@@ -81,9 +78,9 @@ const GlobalStyles = createGlobalStyle`
     /*
       Grid settings
     */
-    --grid-columns: ${Settings.gridColumns};
-    --grid-rows: ${Settings.gridRows};
-    --grid-expose: ${Settings.gridExpose};
+    --grid-columns: ${props => props.config.gridColumns};
+    --grid-rows: ${props => props.config.gridRows};
+    --grid-expose: ${props => props.config.variant.gridExpose ?? 3};
 
     /*
       Font
@@ -103,8 +100,8 @@ const GlobalStyles = createGlobalStyle`
     /*
       Border
     */
-    --tile-border-width: ${Settings.tileBorderWidth}px;
-
+    --tile-border-width: ${props => props.config.variant.tileBorderWidth ?? 5}px;
+    --border-width: var(--tile-border-width);
 
     /*
       Colors
@@ -137,7 +134,6 @@ const GlobalStyles = createGlobalStyle`
       Logo
     */
     --logo-background: var(--color-white);
-
   }
 
   @keyframes expose {

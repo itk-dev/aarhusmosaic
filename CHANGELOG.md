@@ -28,3 +28,4 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Changed tags to ManyToMany relation from json
 - Update fixtures and admin to match new tags
 - Added order by updatedAt for tiles Get operation
+- Added connection between frontend and API
