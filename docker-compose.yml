@@ -65,7 +65,7 @@ services:
 #      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
   rabbit:
-    image: rabbitmq:3.9-management
+    image: rabbitmq:3.11-management-alpine
     networks:
       - app
       - frontend
