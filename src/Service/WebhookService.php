@@ -52,7 +52,7 @@ class WebhookService
         } catch (ClientExceptionInterface|DecodingExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface|TransportExceptionInterface $exception) {
             $this->metricsService->counter('webhook_download_failed_total', 'Webhook download failed counter', 1, ['type' => 'webhook']);
 
-            throw new WebhookException('Fail to fetch submission data', $exception->getCode(), $exception);
+            throw new WebhookException('Fail to fetch submission data: '.$exception->getMessage(), $exception->getCode(), $exception);
         }
 
         $data = $this->validateAndTransformData($data['data'] ?? []);
