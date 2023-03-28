@@ -3,14 +3,16 @@ import styled from 'styled-components'
 import Icon from './icon';
 import PropTypes from "prop-types";
 
-function GridItem({variant, description, image, exposed, tileIcons, tileBorders}) {
+function GridItem({variant, description, image, exposed, tileIcons, tileBorders, exposeFontSize}) {
     return (
         <Wrapper className={exposed ? "exposed" : ""}>
             <Item className={variant} style={{
                 '--background-image': `url(${image}`,
                 '--border-width': tileBorders ? 'var(--tile-border-width)' : 0
             }}>
-                {exposed && <ItemDescription>{description}</ItemDescription>}
+                {exposed && <ItemDescription style={{
+                      '--text-size': `var(--font-size-${exposeFontSize})`
+                  }}>{description}</ItemDescription>}
                 {tileIcons && <ItemIcon src={Icon[variant]} alt=""/>}
             </Item>
         </Wrapper>
@@ -24,11 +26,12 @@ GridItem.propTypes = {
     exposed: PropTypes.bool,
     tileIcons: PropTypes.bool,
     tileBorders: PropTypes.bool,
+    exposeFontSize: PropTypes.string,
 };
 
 const ItemDescription = styled.p`
-  font-size: var(--font-size-h2);
-  font-weight: var(--font-weight-h2);
+  font-size: var(--text-size);
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
   color: white;
   position: absolute;

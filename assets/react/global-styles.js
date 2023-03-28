@@ -92,13 +92,14 @@ const GlobalStyles = createGlobalStyle`
       1.5vw + 1rem,
       2rem
     );
-    --font-size-h2: clamp(
-      1.5rem,
-      4vw + 1rem,
-      4rem
-    );
     --font-weight-normal: 400;
     --font-weight-bold: 700;
+
+    --font-size-xs: calc(var(--font-size-base) * 0.5);
+    --font-size-s: calc(var(--font-size-base) * 0.75);
+    --font-size-m: var(--font-size-base);
+    --font-size-l: calc(var(--font-size-base) * 1.25);
+    --font-size-xl: calc(var(--font-size-base) * 1.5);
 
     /*
       Border

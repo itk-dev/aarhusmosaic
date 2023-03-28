@@ -181,6 +181,7 @@ function Mosaic() {
                                     exposed
                                     tileIcons={config.variant.exposeShowIcon ?? false}
                                     tileBorders={config.variant.exposeShowBorder ?? false}
+                                    exposeFontSize={config.variant.exposeFontSize}
                                     forwardRef={nodeRefs[exposedTile['@id']]}
                                 />
                             </CSSTransition>
