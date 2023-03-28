@@ -6,6 +6,7 @@ import Grid from "../components/grid";
 import LoaderSrc from "../assets/icons/loader.svg";
 import {CenteredContent} from "../components/centered-content";
 import {TransitionGroup, CSSTransition} from "react-transition-group";
+import CtaBox from "../components/cta-box";
 
 function Mosaic() {
     const TILES_LOADING_INTERVAL = 60 * 1000 * 5;
@@ -186,6 +187,12 @@ function Mosaic() {
                         }
                     </TransitionGroup>
 
+                    {config?.variant?.ctaBoxTitle && <CtaBox
+                      title={config.variant.ctaBoxTitle}
+                      description={config.variant.ctaBoxDescription}
+                      image={config.variant.ctaBoxImage}
+                      backgroundColor={config.variant.ctaBoxBackgroundColor}
+                    />}
                     {config?.variant?.mosaicLogo && <Logo/>}
 
                     <GlobalStyles config={config}/>
