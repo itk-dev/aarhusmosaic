@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import "@fontsource/inter/700.css";
+import "@fontsource/inter/400.css";
 
 const GlobalStyles = createGlobalStyle`
   /*
@@ -38,6 +39,7 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     font-family: "Inter";
+    font-weight: 400;
   }
 
   /*
@@ -95,7 +97,8 @@ const GlobalStyles = createGlobalStyle`
       4vw + 1rem,
       4rem
     );
-    --font-weight-h2: 700;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
 
     /*
       Border
