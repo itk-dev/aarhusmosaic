@@ -25,31 +25,34 @@ const Wrapper = styled.div`
   border: calc(var(--border-width) * 2) solid var(--background-color);
   filter: var(--filter-shadow);
   display: flex;
-  column-gap: calc(var(--border-width) * 2) ;
+  column-gap: calc(var(--border-width) * 2);
 
   @media (orientation: portrait) {
     flex-direction: column-reverse;
     align-items: flex-start;
-    row-gap: calc(var(--border-width) * 2) ;
+    row-gap: calc(var(--border-width) * 2);
   }
 `;
+
 const Title = styled.p`
   font-size: calc(var(--font-size-base) * 0.75);
   font-weight: var(--font-weight-bold);
   margin: 0;
   line-height: 1.25;
-  `
+`;
+
 const Description = styled.p`
   font-size: calc(var(--font-size-base) * 0.5);
   font-weight: var(--font-weight-normal);
   margin: var(--border-width) 0 0 0;
   line-height: 1.25;
-  `
+`;
+
 const Img = styled.img`
   max-height: calc(((100vh / var(--grid-rows))*0.5) - calc(var(--border-width) * 6));
   width: auto;
   border: 1px solid hsl(0, 0%, 80%);
-`
+`;
 
 CtaBox.propTypes = {
   title: PropTypes.string,
