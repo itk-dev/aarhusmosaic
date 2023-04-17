@@ -1,6 +1,7 @@
 services:
   rabbit:
     image: rabbitmq:3.11-management-alpine
+    restart: unless-stopped
     networks:
       - app
       - frontend
