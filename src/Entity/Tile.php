@@ -107,7 +107,7 @@ class Tile
     public function getImage(): ?string
     {
         // HACK: add path here prefix to ensure image paths work both in API and easy admin.
-        return '/tiles/' . $this->image;
+        return '/tiles/'.$this->image;
     }
 
     public function setImage(string $image): self
