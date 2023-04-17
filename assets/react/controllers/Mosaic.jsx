@@ -41,7 +41,7 @@ function Mosaic() {
     const loadTiles = () => {
         const errorMessageFailedToFetch = "Could not fetch tiles";
 
-        fetch(`/api/v1/tiles/random?page=1&limit=${config.numberOfTiles}`, {
+        fetch(`/api/v1/tiles${config.sortTiles}?page=1&limit=${config.numberOfTiles}`, {
             headers: {
                 authorization: `Bearer ${params.key}`
             }
@@ -97,11 +97,15 @@ function Mosaic() {
         }
 
         const numberOfTiles = screen.gridColumns * screen.gridRows;
+        const sortTiles = JSON.parse(screen.variant).randomTiles ? '/random' : '';
+
+        console.log("sortTiles:" + sortTiles);
 
         setConfig({
             gridColumns: screen.gridColumns ?? 6,
             gridRows: screen.gridRows ?? 5,
             numberOfTiles,
+            sortTiles,
             variant: JSON.parse(screen.variant),
         });
     }, [screen]);
