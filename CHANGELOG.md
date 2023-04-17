@@ -11,6 +11,9 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 
+- Added monolog and mime packages
+- Fix tiles image path
+
 ### Added
 - Ctabox in frontend
 - Frontend config for font size

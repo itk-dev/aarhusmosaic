@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
 
             $tile = new Tile();
             $tile->setDescription($datum->description)
-                ->setImage('/tiles/'.basename($datum->image))
+                ->setImage(basename($datum->image))
                 ->setMail($datum->mail)
                 ->setAccepted($datum->accepted)
                 ->setExtra(json_encode($datum->extra));
