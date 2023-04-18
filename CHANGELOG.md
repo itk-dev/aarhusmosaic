@@ -13,7 +13,8 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 - Fix colored overlay
 - Added monolog and mime packages
-- Fix tiles image path
+- Fixed tiles image path
+- Fixed defaults when tile.extra or screen.variant are not parsable.
 
 ### Added
 - Ctabox in frontend
