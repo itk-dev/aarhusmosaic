@@ -41,7 +41,9 @@ function Mosaic() {
     const loadTiles = () => {
         const errorMessageFailedToFetch = "Could not fetch tiles";
 
-        fetch(`/api/v1/tiles/random?page=1&limit=${config.numberOfTiles}`, {
+        const randomPath = config.randomTiles ? '/random' : "";
+
+        fetch(`/api/v1/tiles${randomPath}?page=1&limit=${config.numberOfTiles}`, {
             headers: {
                 authorization: `Bearer ${params.key}`
             }
@@ -126,10 +128,13 @@ function Mosaic() {
             variant = {};
         }
 
+        const randomTiles = variant.randomTiles ?? true;
+
         setConfig({
             gridColumns,
             gridRows,
             numberOfTiles,
+            randomTiles,
             variant,
         });
     }, [screen]);
