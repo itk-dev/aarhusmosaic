@@ -8,7 +8,8 @@ function GridItem({variant, description, image, exposed, tileIcons, tileBorders,
         <Wrapper className={exposed ? "exposed" : ""}>
             <Item className={variant} style={{
                 '--background-image': `url(${image}`,
-                '--border-width': tileBorders ? 'var(--tile-border-width)' : 0
+                '--border-width': tileBorders ? 'var(--tile-border-width)' : 0,
+                '--overlay-opacity': tileBorders ? '0.1' : '0'
             }}>
                 {exposed && <ItemDescription style={{
                       '--text-size': `var(--font-size-${exposeFontSize})`
@@ -43,7 +44,7 @@ const ItemDescription = styled.p`
   -webkit-line-clamp: 4;
   overflow: hidden;
   filter: var(--filter-shadow);
-`
+`;
 
 const ItemIcon = styled.img`
   position: absolute;
@@ -51,7 +52,7 @@ const ItemIcon = styled.img`
   left: 0;
   width: auto;
   height: 20%;
-`
+`;
 
 const Item = styled.div`
   position: relative;
@@ -73,7 +74,7 @@ const Item = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.1;
+    opacity: var(--overlay-opacity);
   }
 
   &.one {
@@ -221,8 +222,7 @@ const Item = styled.div`
     animation: expose;
     animation-direction: alternate;
   }
-
-`
+`;
 
 const Wrapper = styled.div`
   &.exposed {
@@ -230,6 +230,6 @@ const Wrapper = styled.div`
     top: calc(100vh / var(--grid-rows));
     left: calc(100vw / var(--grid-columns));
   }
-`
+`;
 
 export default GridItem;

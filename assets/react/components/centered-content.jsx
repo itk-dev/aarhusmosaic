@@ -9,4 +9,4 @@ export const CenteredContent = styled.div`
   justify-content: center;
   align-content: center;
   background: rgb(241, 242, 243);
-`
+`;

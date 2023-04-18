@@ -41,7 +41,9 @@ function Mosaic() {
     const loadTiles = () => {
         const errorMessageFailedToFetch = "Could not fetch tiles";
 
-        fetch(`/api/v1/tiles${config.sortTiles}?page=1&limit=${config.numberOfTiles}`, {
+        const randomPath = config.randomTiles ? '/random' : "";
+
+        fetch(`/api/v1/tiles${randomPath}?page=1&limit=${config.numberOfTiles}`, {
             headers: {
                 authorization: `Bearer ${params.key}`
             }
@@ -55,8 +57,23 @@ function Mosaic() {
             })
             .then((data) => {
                 const loadedTiles = [...data['hydra:member']];
+
                 setTiles(loadedTiles.map((tile) => {
-                    tile.extra = JSON.parse(tile.extra);
+                    let extra;
+
+                    try {
+                        extra = JSON.parse(tile.extra);
+                    } catch (e) {
+                        console.error(e);
+
+                        // Default.
+                        extra = {
+                            "variant": null,
+                        }
+                    }
+
+                    tile.extra = extra;
+
                     return tile;
                 }));
 
@@ -96,17 +113,29 @@ function Mosaic() {
             return;
         }
 
-        const numberOfTiles = screen.gridColumns * screen.gridRows;
-        const sortTiles = JSON.parse(screen.variant).randomTiles ? '/random' : '';
+        const gridColumns = screen.gridColumns ?? 6;
+        const gridRows = screen.gridColumns ?? 6;
+        const numberOfTiles = gridColumns * gridRows;
 
-        console.log("sortTiles:" + sortTiles);
+        let variant;
+
+        try {
+            variant = JSON.parse(screen.variant);
+        } catch (e) {
+            console.error(e);
+
+            // Default to empty object.
+            variant = {};
+        }
+
+        const randomTiles = variant.randomTiles ?? true;
 
         setConfig({
-            gridColumns: screen.gridColumns ?? 6,
-            gridRows: screen.gridRows ?? 5,
+            gridColumns,
+            gridRows,
             numberOfTiles,
-            sortTiles,
-            variant: JSON.parse(screen.variant),
+            randomTiles,
+            variant,
         });
     }, [screen]);
 
