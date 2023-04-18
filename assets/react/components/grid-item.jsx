@@ -43,7 +43,7 @@ const ItemDescription = styled.p`
   -webkit-line-clamp: 4;
   overflow: hidden;
   filter: var(--filter-shadow);
-`
+`;
 
 const ItemIcon = styled.img`
   position: absolute;
@@ -51,7 +51,7 @@ const ItemIcon = styled.img`
   left: 0;
   width: auto;
   height: 20%;
-`
+`;
 
 const Item = styled.div`
   position: relative;
@@ -221,8 +221,7 @@ const Item = styled.div`
     animation: expose;
     animation-direction: alternate;
   }
-
-`
+`;
 
 const Wrapper = styled.div`
   &.exposed {
@@ -230,6 +229,6 @@ const Wrapper = styled.div`
     top: calc(100vh / var(--grid-rows));
     left: calc(100vw / var(--grid-columns));
   }
-`
+`;
 
 export default GridItem;

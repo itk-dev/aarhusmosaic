@@ -55,8 +55,23 @@ function Mosaic() {
             })
             .then((data) => {
                 const loadedTiles = [...data['hydra:member']];
+
                 setTiles(loadedTiles.map((tile) => {
-                    tile.extra = JSON.parse(tile.extra);
+                    let extra;
+
+                    try {
+                        extra = JSON.parse(tile.extra);
+                    } catch (e) {
+                        console.error(e);
+
+                        // Default.
+                        extra = {
+                            "variant": null,
+                        }
+                    }
+
+                    tile.extra = extra;
+
                     return tile;
                 }));
 
@@ -96,13 +111,26 @@ function Mosaic() {
             return;
         }
 
-        const numberOfTiles = screen.gridColumns * screen.gridRows;
+        const gridColumns = screen.gridColumns ?? 6;
+        const gridRows = screen.gridColumns ?? 6;
+        const numberOfTiles = gridColumns * gridRows;
+
+        let variant;
+
+        try {
+            variant = JSON.parse(screen.variant);
+        } catch (e) {
+            console.error(e);
+
+            // Default to empty object.
+            variant = {};
+        }
 
         setConfig({
-            gridColumns: screen.gridColumns ?? 6,
-            gridRows: screen.gridRows ?? 5,
+            gridColumns,
+            gridRows,
             numberOfTiles,
-            variant: JSON.parse(screen.variant),
+            variant,
         });
     }, [screen]);
 
