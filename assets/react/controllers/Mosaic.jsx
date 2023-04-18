@@ -40,52 +40,55 @@ function Mosaic() {
 
     const loadTiles = () => {
         const errorMessageFailedToFetch = "Could not fetch tiles";
-
         const randomPath = config.randomTiles ? '/random' : "";
 
-        fetch(`/api/v1/tiles${randomPath}?page=1&limit=${config.numberOfTiles}`, {
-            headers: {
-                authorization: `Bearer ${params.key}`
-            }
+        fetch(`/api/v1/tiles${randomPath}?` + new URLSearchParams({
+            page: 1,
+            limit: config.numberOfTiles,
+            'order[updatedAt]': 'desc',
+          }), {
+          headers: {
+              authorization: `Bearer ${params.key}`
+          }
         })
-            .then((resp) => {
-                if (!resp.ok) {
-                    throw new Error(errorMessageFailedToFetch);
-                }
+          .then((resp) => {
+              if (!resp.ok) {
+                  throw new Error(errorMessageFailedToFetch);
+              }
 
-                return resp.json();
-            })
-            .then((data) => {
-                const loadedTiles = [...data['hydra:member']];
+              return resp.json();
+          })
+          .then((data) => {
+              const loadedTiles = [...data['hydra:member']];
 
-                setTiles(loadedTiles.map((tile) => {
-                    let extra;
+              setTiles(loadedTiles.map((tile) => {
+                  let extra;
 
-                    try {
-                        extra = JSON.parse(tile.extra);
-                    } catch (e) {
-                        console.error(e);
+                  try {
+                      extra = JSON.parse(tile.extra);
+                  } catch (e) {
+                      console.error(e);
 
-                        // Default.
-                        extra = {
-                            "variant": null,
-                        }
-                    }
+                      // Default.
+                      extra = {
+                          "variant": null,
+                      }
+                  }
 
-                    tile.extra = extra;
+                  tile.extra = extra;
 
-                    return tile;
-                }));
+                  return tile;
+              }));
 
-                if (errorMessage === errorMessageFailedToFetch) {
-                    setErrorMessage(null);
-                }
-            })
-            .catch((err) => {
-                if (tiles.length === 0) {
-                    setErrorMessage(err.message);
-                }
-            });
+              if (errorMessage === errorMessageFailedToFetch) {
+                  setErrorMessage(null);
+              }
+          })
+          .catch((err) => {
+              if (tiles.length === 0) {
+                  setErrorMessage(err.message);
+              }
+          });
     }
 
     useEffect(() => {
