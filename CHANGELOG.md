@@ -12,6 +12,7 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 ## [Unreleased]
 
 - Fixed that /random should not show not accepted tiles
+- Fix colored overlay
 - Added monolog and mime packages
 - Fix tiles image path
 
