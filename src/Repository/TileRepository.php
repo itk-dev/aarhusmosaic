@@ -52,7 +52,8 @@ class TileRepository extends ServiceEntityRepository
     public function getRandomTiles(int $limit): array
     {
         $queryBuilder = $this->createQueryBuilder('t')
-            ->addSelect('RAND() as HIDDEN rand')->orderBy('rand');
+            ->addSelect('RAND() as HIDDEN rand')->orderBy('rand')
+            ->andWhere('t.accepted = true');
 
         $query = $this->getEntityManager()
             ->createQuery($queryBuilder->getDQL())
