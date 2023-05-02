@@ -50,13 +50,18 @@
     "gridColumns": 6,
     "gridRows": 6,
     "variant": {
-      "showIcons": true,
-      "showBorders": true,
-      "gridExpose": 4,
+      "showIcons": false,
+      "showBorders": false,
+      "gridExpose": 2,
       "exposeShowBorder": true,
       "exposeShowIcon": true,
-      "mosaicLogo": false,
-      "exposeTimeout": 10
+      "mosaicLogo": true,
+      "exposeTimeout": 14,
+      "ctaBoxTitle": "Del dit billede",
+      "ctaBoxDescription": "Skan koden og indsend dit bidrag, for at blive en del af denne mosaik.",
+      "ctaBoxImage": "https://qr-codes-svg.s3.amazonaws.com/jpTJHD.svg?1680006094578",
+      "ctaBoxBackgroundColor": "white",
+      "exposeFontSize": "xl"
     }
   }
 ]

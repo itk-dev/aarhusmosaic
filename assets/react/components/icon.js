@@ -35,6 +35,6 @@ const Icon = {
   fifteen,
   sixteen,
   verdensmaal,
-}
+};
 
 export default Icon;

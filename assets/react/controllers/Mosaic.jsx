@@ -40,35 +40,55 @@ function Mosaic() {
 
     const loadTiles = () => {
         const errorMessageFailedToFetch = "Could not fetch tiles";
+        const randomPath = config.randomTiles ? '/random' : "";
 
-        fetch(`/api/v1/tiles/random?page=1&limit=${config.numberOfTiles}`, {
-            headers: {
-                authorization: `Bearer ${params.key}`
-            }
+        fetch(`/api/v1/tiles${randomPath}?` + new URLSearchParams({
+            page: 1,
+            limit: config.numberOfTiles,
+            'order[updatedAt]': 'desc',
+          }), {
+          headers: {
+              authorization: `Bearer ${params.key}`
+          }
         })
-            .then((resp) => {
-                if (!resp.ok) {
-                    throw new Error(errorMessageFailedToFetch);
-                }
+          .then((resp) => {
+              if (!resp.ok) {
+                  throw new Error(errorMessageFailedToFetch);
+              }
 
-                return resp.json();
-            })
-            .then((data) => {
-                const loadedTiles = [...data['hydra:member']];
-                setTiles(loadedTiles.map((tile) => {
-                    tile.extra = JSON.parse(tile.extra);
-                    return tile;
-                }));
+              return resp.json();
+          })
+          .then((data) => {
+              const loadedTiles = [...data['hydra:member']];
 
-                if (errorMessage === errorMessageFailedToFetch) {
-                    setErrorMessage(null);
-                }
-            })
-            .catch((err) => {
-                if (tiles.length === 0) {
-                    setErrorMessage(err.message);
-                }
-            });
+              setTiles(loadedTiles.map((tile) => {
+                  let extra;
+
+                  try {
+                      extra = JSON.parse(tile.extra);
+                  } catch (e) {
+                      console.error(e);
+
+                      // Default.
+                      extra = {
+                          "variant": null,
+                      }
+                  }
+
+                  tile.extra = extra;
+
+                  return tile;
+              }));
+
+              if (errorMessage === errorMessageFailedToFetch) {
+                  setErrorMessage(null);
+              }
+          })
+          .catch((err) => {
+              if (tiles.length === 0) {
+                  setErrorMessage(err.message);
+              }
+          });
     }
 
     useEffect(() => {
@@ -96,13 +116,29 @@ function Mosaic() {
             return;
         }
 
-        const numberOfTiles = screen.gridColumns * screen.gridRows;
+        const gridColumns = screen.gridColumns ?? 6;
+        const gridRows = screen.gridColumns ?? 6;
+        const numberOfTiles = gridColumns * gridRows;
+
+        let variant;
+
+        try {
+            variant = JSON.parse(screen.variant);
+        } catch (e) {
+            console.error(e);
+
+            // Default to empty object.
+            variant = {};
+        }
+
+        const randomTiles = variant.randomTiles ?? true;
 
         setConfig({
-            gridColumns: screen.gridColumns ?? 6,
-            gridRows: screen.gridRows ?? 5,
+            gridColumns,
+            gridRows,
             numberOfTiles,
-            variant: JSON.parse(screen.variant),
+            randomTiles,
+            variant,
         });
     }, [screen]);
 

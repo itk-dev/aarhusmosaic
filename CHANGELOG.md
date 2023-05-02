@@ -11,8 +11,13 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 
+- Sort tiles last changed first.
+- Add possibility of switching between random and sorted data
+- Fixed that /random should not show not accepted tiles
+- Fix colored overlay
 - Added monolog and mime packages
-- Fix tiles image path
+- Fixed tiles image path
+- Fixed defaults when tile.extra or screen.variant are not parsable.
 
 ### Added
 - Ctabox in frontend
