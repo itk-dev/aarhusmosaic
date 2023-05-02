@@ -51,6 +51,9 @@ class Screen
     #[Groups(['read', 'write'])]
     private Collection $tags;
 
+    #[ORM\ManyToOne(inversedBy: 'screens')]
+    private ?ApiUser $apiUser = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -131,5 +134,28 @@ class Screen
         $this->tags->removeElement($tag);
 
         return $this;
+    }
+
+    public function getApiUser(): ?ApiUser
+    {
+        return $this->apiUser;
+    }
+
+    public function setApiUser(?ApiUser $apiUser): self
+    {
+        $this->apiUser = $apiUser;
+
+        return $this;
+    }
+
+    /**
+     * Helper function to generate query parameter for frontend loading.
+     *
+     * @return string
+     *   The URI for loading the screen
+     */
+    public function getScreenUrl(): string
+    {
+        return sprintf('?id=%s&key=%s', $this->id, $this->apiUser->getToken());
     }
 }

@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "name": "Test API user",
     "token": "123456789",
     "remoteApiKey": "987654321"
   }
