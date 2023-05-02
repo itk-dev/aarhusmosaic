@@ -44,6 +44,10 @@ function Mosaic() {
 
         fetch(`/api/v1/tiles${randomPath}?` + new URLSearchParams({
             page: 1,
+
+            // TODO: Add tags to url params to filter the returned tiles
+            //tags: config.tileTags,
+
             limit: config.numberOfTiles,
             'order[updatedAt]': 'desc',
           }), {
@@ -120,6 +124,9 @@ function Mosaic() {
         const gridRows = screen.gridColumns ?? 6;
         const numberOfTiles = gridColumns * gridRows;
 
+        // TODO: store tags from screen config
+        // const tileTags = screen.tileTags ?? "";
+
         let variant;
 
         try {
@@ -139,6 +146,8 @@ function Mosaic() {
             numberOfTiles,
             randomTiles,
             variant,
+            // TODO: Add tags to config
+            // tileTags,
         });
     }, [screen]);
 
