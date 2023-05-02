@@ -59,7 +59,7 @@ class TileRepository extends ServiceEntityRepository
             ->createQuery($queryBuilder->getDQL())
             ->setFirstResult(0)
             ->setMaxResults($limit);
-        $paginator = new Paginator($query, $fetchJoinCollection = true);
+        $paginator = new Paginator($query);
 
         $tiles = [];
         foreach ($paginator as $tile) {

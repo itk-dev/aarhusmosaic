@@ -35,9 +35,13 @@ final class WebhookHandler
             ->setMail($data['mail'])
             ->setImage($data['image'])
             ->setAccepted($data['accepted'])
-            ->setExtra($data['extra']);
+            ->setExtra(json_encode($data['extra']));
 
-        foreach ($data['tags'] as $tag) {
+        // Split tags on ',' and remove whitespaces and all to lower case.
+        $tags = array_map('trim', explode(',', $data['tags']));
+        $tags = array_map('strtolower', $tags);
+
+        foreach ($tags as $tag) {
             $entity = $this->tagsRepository->findOneBy(['tag' => $tag]);
             if (is_null($entity)) {
                 $entity = new Tags();

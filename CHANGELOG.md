@@ -18,6 +18,8 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Added monolog and mime packages
 - Fixed tiles image path
 - Fixed defaults when tile.extra or screen.variant are not parsable.
+- Changed tags input format "tag1,tag2,tag3" in webhook callback.
+- Ensure uniq id for upload filenames (to safeguard file override). 
 
 ### Added
 - Ctabox in frontend

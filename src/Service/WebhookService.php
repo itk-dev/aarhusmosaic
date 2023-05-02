@@ -89,8 +89,9 @@ class WebhookService
             throw new WebhookException('Fail to fetch image (dode: '.$response->getStatusCode().')');
         }
 
-        $uri = '/tiles/'.basename($url);
-        $dest = $this->projectDir.'/public'.$uri;
+        $ext = pathinfo(basename($url), PATHINFO_EXTENSION);
+        $uri = uniqid().'.'.$ext;
+        $dest = $this->projectDir.'/public/tiles/'.$uri;
         $fileHandler = fopen($dest, 'w');
         foreach ($this->client->stream($response) as $chunk) {
             fwrite($fileHandler, $chunk->getContent());
@@ -137,7 +138,7 @@ class WebhookService
 
         // Move data left into extra field.
         foreach ($data as $field => $datum) {
-            $data['extra'][$field] = $datum;
+            $output['extra'][$field] = $datum;
         }
 
         return $output;
