@@ -156,6 +156,12 @@ class Screen
      */
     public function getScreenUrl(): string
     {
-        return sprintf('?id=%s&key=%s', $this->id, $this->apiUser->getToken());
+        $apiUser = $this->apiUser;
+        if (!is_null($apiUser) && !is_null($this->id)) {
+            return sprintf('?id=%s&key=%s', $this->id, $apiUser->getToken());
+        }
+
+        // Should never happen.
+        return '';
     }
 }

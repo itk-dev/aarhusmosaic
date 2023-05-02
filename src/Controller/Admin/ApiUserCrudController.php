@@ -19,9 +19,9 @@ class ApiUserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('name'),
-            TextField::new('token'),
-            TextField::new('remoteApiKey'),
+            TextField::new('name')->setRequired(true),
+            TextField::new('token')->setRequired(true),
+            TextField::new('remoteApiKey')->setRequired(true),
             DateField::new('createdAt')->hideOnForm()->hideOnIndex(),
             DateField::new('updatedAt')->hideOnForm(),
         ];
