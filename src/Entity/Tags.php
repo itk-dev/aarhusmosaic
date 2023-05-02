@@ -34,9 +34,13 @@ class Tags
     #[ORM\ManyToMany(targetEntity: Tile::class, mappedBy: 'tags')]
     private Collection $tiles;
 
+    #[ORM\ManyToMany(targetEntity: Screen::class, mappedBy: 'tags')]
+    private Collection $screens;
+
     public function __construct()
     {
         $this->tiles = new ArrayCollection();
+        $this->screens = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -80,6 +84,33 @@ class Tags
     {
         if ($this->tiles->removeElement($tile)) {
             $tile->removeTag($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Screen>
+     */
+    public function getScreens(): Collection
+    {
+        return $this->screens;
+    }
+
+    public function addScreen(Screen $screen): self
+    {
+        if (!$this->screens->contains($screen)) {
+            $this->screens->add($screen);
+            $screen->addTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScreen(Screen $screen): self
+    {
+        if ($this->screens->removeElement($screen)) {
+            $screen->removeTag($this);
         }
 
         return $this;

@@ -19,13 +19,13 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Screen.jsonld'
+                $ref: '#/components/schemas/Screen.jsonld-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Screen'
+                $ref: '#/components/schemas/Screen-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Screen'
+                $ref: '#/components/schemas/Screen-read'
         404:
           description: 'Resource not found'
       summary: 'Retrieves a Screen resource.'
@@ -300,7 +300,7 @@ paths:
     parameters: []
 components:
   schemas:
-    Screen:
+    Screen-read:
       type: object
       description: ''
       deprecated: false
@@ -316,13 +316,11 @@ components:
           type: integer
         variant:
           type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-    Screen.jsonld:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tags-read'
+    Screen.jsonld-read:
       type: object
       description: ''
       deprecated: false
@@ -361,12 +359,10 @@ components:
           type: integer
         variant:
           type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tags.jsonld-read'
     Tags-read:
       type: object
       description: ''

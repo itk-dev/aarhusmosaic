@@ -41,15 +41,7 @@ class AppFixtures extends Fixture
                 ->setExtra(json_encode($datum->extra));
 
             foreach ($datum->tags as $tag) {
-                $entity = $this->tagsRepository->findOneBy(['tag' => $tag]);
-                if (is_null($entity)) {
-                    $entity = new Tags();
-                    $entity->setTag($tag);
-                    $manager->persist($entity);
-
-                    // Need to flush data to ensure the find above now will find the new tag in next loop.
-                    $manager->flush();
-                }
+                $entity = $this->createTags($manager, $tag);
                 $tile->addTag($entity);
             }
 
@@ -65,6 +57,12 @@ class AppFixtures extends Fixture
                 ->setGridColumns($datum->gridColumns)
                 ->setGridRows($datum->gridRows)
                 ->setVariant(json_encode($datum->variant));
+
+            foreach ($datum->tags as $tag) {
+                $entity = $this->createTags($manager, $tag);
+                $screen->addTag($entity);
+            }
+
             $manager->persist($screen);
         }
 
@@ -79,5 +77,31 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    /**
+     * Helper function to create tags.
+     *
+     * @param ObjectManager $manager
+     *   Database entity manager.
+     * @param string $tagName
+     *   Name of the tag to create.
+     *
+     * @return Tags
+     *   The entity representation of the tag.
+     */
+    private function createTags(ObjectManager $manager, string $tagName): Tags
+    {
+        $entity = $this->tagsRepository->findOneBy(['tag' => $tagName]);
+        if (is_null($entity)) {
+            $entity = new Tags();
+            $entity->setTag($tagName);
+            $manager->persist($entity);
+
+            // Need to flush data to ensure the find above now will find the new tag in next loop.
+            $manager->flush();
+        }
+
+        return $entity;
     }
 }

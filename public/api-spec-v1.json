@@ -24,17 +24,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Screen.jsonld"
+                                    "$ref": "#/components/schemas/Screen.jsonld-read"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Screen"
+                                    "$ref": "#/components/schemas/Screen-read"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Screen"
+                                    "$ref": "#/components/schemas/Screen-read"
                                 }
                             }
                         }
@@ -650,7 +650,7 @@
     },
     "components": {
         "schemas": {
-            "Screen": {
+            "Screen-read": {
                 "type": "object",
                 "description": "",
                 "deprecated": false,
@@ -671,17 +671,15 @@
                     "variant": {
                         "type": "string"
                     },
-                    "createdAt": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "updatedAt": {
-                        "type": "string",
-                        "format": "date-time"
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Tags-read"
+                        }
                     }
                 }
             },
-            "Screen.jsonld": {
+            "Screen.jsonld-read": {
                 "type": "object",
                 "description": "",
                 "deprecated": false,
@@ -737,13 +735,11 @@
                     "variant": {
                         "type": "string"
                     },
-                    "createdAt": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "updatedAt": {
-                        "type": "string",
-                        "format": "date-time"
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Tags.jsonld-read"
+                        }
                     }
                 }
             },
