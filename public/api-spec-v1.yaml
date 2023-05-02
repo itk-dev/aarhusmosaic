@@ -247,6 +247,28 @@ paths:
           required: true
           description: 'Limit number of results (Max Tiles returned is 100)'
           example: '15'
+        -
+          name: tags.tag
+          in: query
+          required: false
+          schema:
+            type: string
+          allowEmptyValue: true
+          style: form
+          explode: true
+          allowReserved: false
+        -
+          name: 'tags.tag[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          allowEmptyValue: true
+          style: form
+          explode: true
+          allowReserved: false
       deprecated: false
     parameters: []
   '/api/v1/tiles/{id}':

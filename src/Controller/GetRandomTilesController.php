@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\TileRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 
@@ -22,6 +23,14 @@ class GetRandomTilesController extends AbstractController
         $limit = (int) $request->query->get('limit');
         $limit = min(self::MAX_ALLOWED_RESULTS, $limit);
 
-        return $this->tileRepository->getRandomTiles($limit);
+        // Hack to get around strangeness in API platform.
+        try {
+            $tags = [];
+            $tags[] = $request->query->get('tags_tag');
+        } catch (BadRequestException $exception) {
+            $tags = $request->query->all('tags_tag');
+        }
+
+        return $this->tileRepository->getRandomTiles($limit, $tags);
     }
 }

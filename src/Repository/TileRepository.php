@@ -45,20 +45,30 @@ class TileRepository extends ServiceEntityRepository
      *
      * @param int $limit
      *   Max number of Tiles to fetch
+     * @param array $tags
+     *   Array of tags to filter on
      *
      * @return array
      *   Well Tiles
      */
-    public function getRandomTiles(int $limit): array
+    public function getRandomTiles(int $limit, array $tags): array
     {
         $queryBuilder = $this->createQueryBuilder('t')
             ->addSelect('RAND() as HIDDEN rand')->orderBy('rand')
-            ->andWhere('t.accepted = true');
+            ->andWhere('t.accepted = true')
+            ->innerJoin('t.tags', 'tt');
+
+        if (!empty($tags)) {
+            $queryBuilder->andWhere('tt.tag IN (:tagNames)');
+        }
 
         $query = $this->getEntityManager()
             ->createQuery($queryBuilder->getDQL())
             ->setFirstResult(0)
             ->setMaxResults($limit);
+        if (!empty($tags)) {
+            $query->setParameter('tagNames', $tags);
+        }
         $paginator = new Paginator($query);
 
         $tiles = [];
