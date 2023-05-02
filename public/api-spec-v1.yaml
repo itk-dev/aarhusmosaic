@@ -180,6 +180,32 @@ paths:
           style: form
           explode: false
           allowReserved: false
+        -
+          name: tags.tag
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+        -
+          name: 'tags.tag[]'
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+          allowReserved: false
       deprecated: false
     parameters: []
   /api/v1/tiles/random:

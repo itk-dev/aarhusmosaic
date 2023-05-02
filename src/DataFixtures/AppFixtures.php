@@ -82,13 +82,13 @@ class AppFixtures extends Fixture
     /**
      * Helper function to create tags.
      *
-     * @param ObjectManager $manager
-     *   Database entity manager.
+     * @param objectManager $manager
+     *   Database entity manager
      * @param string $tagName
-     *   Name of the tag to create.
+     *   Name of the tag to create
      *
-     * @return Tags
-     *   The entity representation of the tag.
+     * @return tags
+     *   The entity representation of the tag
      */
     private function createTags(ObjectManager $manager, string $tagName): Tags
     {
