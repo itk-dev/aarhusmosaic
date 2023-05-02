@@ -26,7 +26,7 @@ class TileCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('description'),
             ImageField::new('image')->setUploadDir('/public/tiles'),
-            AssociationField::new('tags')->hideOnIndex(),
+            AssociationField::new('tags')->hideOnIndex()->setRequired(true),
             EmailField::new('mail'),
             BooleanField::new('accepted'),
             CodeEditorField::new('extra')->hideOnIndex(),
