@@ -22,6 +22,7 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Ensure uniq id for upload filenames (to safeguard file override).
 - Added tags filtering to tile's API end-point.
 - Added api user to screen and generated frontend URL in screen admin.
+- Added admin UI help texts and auto-generated tokens for new api-users
 
 ### Added
 - Ctabox in frontend
