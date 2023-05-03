@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(241, 242, 243); display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<g transform="translate(20 20)">
+  <rect x="-15" y="-15" width="30" height="30" fill="#337ab7">
+    <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" calcMode="spline" dur="1.25s" values="1;1;0.2;1;1" keyTimes="0;0.2;0.5;0.8;1" keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5" begin="-0.5s"></animateTransform>
+  </rect></g>
+<g transform="translate(50 20)">
+  <rect x="-15" y="-15" width="30" height="30" fill="#5bc0de">
+    <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" calcMode="spline" dur="1.25s" values="1;1;0.2;1;1" keyTimes="0;0.2;0.5;0.8;1" keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5" begin="-0.37499999999999994s"></animateTransform>
+  </rect></g>
+<g transform="translate(80 20)">
+  <rect x="-15" y="-15" width="30" height="30" fill="#5cb85c">
+    <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" calcMode="spline" dur="1.25s" values="1;1;0.2;1;1" keyTimes="0;0.2;0.5;0.8;1" keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5" begin="-0.25s"></animateTransform>
+  </rect></g>
+<g transform="translate(20 50)">
+  <rect x="-15" y="-15" width="30" height="30" fill="#5bc0de">
+    <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" calcMode="spline" dur="1.25s" values="1;1;0.2;1;1" keyTimes="0;0.2;0.5;0.8;1" keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5" begin="-0.37499999999999994s"></animateTransform>
+  </rect></g>
+<g transform="translate(50 50)">
+  <rect x="-15" y="-15" width="30" height="30" fill="#5cb85c">
+    <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" calcMode="spline" dur="1.25s" values="1;1;0.2;1;1" keyTimes="0;0.2;0.5;0.8;1" keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5" begin="-0.25s"></animateTransform>
+  </rect></g>
+<g transform="translate(80 50)">
+  <rect x="-15" y="-15" width="30" height="30" fill="#f0ad4e">
+    <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" calcMode="spline" dur="1.25s" values="1;1;0.2;1;1" keyTimes="0;0.2;0.5;0.8;1" keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5" begin="-0.125s"></animateTransform>
+  </rect></g>
+<g transform="translate(20 80)">
+  <rect x="-15" y="-15" width="30" height="30" fill="#5cb85c">
+    <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" calcMode="spline" dur="1.25s" values="1;1;0.2;1;1" keyTimes="0;0.2;0.5;0.8;1" keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5" begin="-0.25s"></animateTransform>
+  </rect></g>
+<g transform="translate(50 80)">
+  <rect x="-15" y="-15" width="30" height="30" fill="#f0ad4e">
+    <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" calcMode="spline" dur="1.25s" values="1;1;0.2;1;1" keyTimes="0;0.2;0.5;0.8;1" keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5" begin="-0.125s"></animateTransform>
+  </rect></g>
+<g transform="translate(80 80)">
+  <rect x="-15" y="-15" width="30" height="30" fill="#d9534f">
+    <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" calcMode="spline" dur="1.25s" values="1;1;0.2;1;1" keyTimes="0;0.2;0.5;0.8;1" keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5" begin="0s"></animateTransform>
+  </rect></g>
+
+</svg>
