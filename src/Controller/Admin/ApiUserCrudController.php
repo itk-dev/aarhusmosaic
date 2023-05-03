@@ -20,11 +20,11 @@ class ApiUserCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name')->setRequired(true)
-                ->setHelp('User friendly name for this API user'),
+                ->setHelp('User friendly name for this API user.'),
             TextField::new('token')->setRequired(true)
-                ->setHelp('Access token used by the screen to access configuration and tiles'),
+                ->setHelp('Access token used by the screen to access configuration and tiles.'),
             TextField::new('remoteApiKey')->setRequired(true)
-                ->setHelp('Remote API key from "selvbetjening" to access user submissions-'),
+                ->setHelp('Remote API key from "selvbetjening" to access user submissions.'),
             DateField::new('createdAt')->hideOnForm()->hideOnIndex(),
             DateField::new('updatedAt')->hideOnForm(),
         ];
