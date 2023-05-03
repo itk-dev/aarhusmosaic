@@ -26,10 +26,17 @@ class GetRandomTilesController extends AbstractController
         // Hack to get around strangeness in API platform.
         try {
             $tags = [];
-            $tags[] = $request->query->get('tags_tag');
+            $tag = $request->query->get('tags_tag');
+            if (!is_null($tag)) {
+                $tags[] = $tag;
+            }
         } catch (BadRequestException $exception) {
             $tags = $request->query->all('tags_tag');
         }
+
+        // Sanitize tags.
+        $tags = array_map('trim', $tags);
+        $tags = array_map('strtolower', $tags);
 
         return $this->tileRepository->getRandomTiles($limit, $tags);
     }

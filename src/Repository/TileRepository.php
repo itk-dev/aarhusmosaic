@@ -66,7 +66,9 @@ class TileRepository extends ServiceEntityRepository
             ->createQuery($queryBuilder->getDQL())
             ->setFirstResult(0)
             ->setMaxResults($limit);
+
         if (!empty($tags)) {
+            // We need to set the parameter on this query created for the paginator.
             $query->setParameter('tagNames', $tags);
         }
         $paginator = new Paginator($query);
