@@ -41,16 +41,17 @@ function Mosaic() {
     const loadTiles = () => {
         const errorMessageFailedToFetch = "Could not fetch tiles";
         const randomPath = config.randomTiles ? '/random' : "";
+        const searchParams = new URLSearchParams({
+          page: 1,
+          limit: config.numberOfTiles,
+          'order[updatedAt]': 'desc',
+        });
 
-        const screenTags = screen.tags.map(tag =>
-          `tags.tag[]=` + tag.tag  + `&`
-        );
+        screen.tags.forEach((tag) => {
+          searchParams.append("tags.tag", tag.tag);
+        });
 
-        fetch(`/api/v1/tiles${randomPath}?${screenTags}` + new URLSearchParams({
-            page: 1,
-            limit: config.numberOfTiles,
-            'order[updatedAt]': 'desc',
-          }), {
+        fetch(`/api/v1/tiles${randomPath}?` + searchParams, {
           headers: {
               authorization: `Bearer ${params.key}`
           }
