@@ -24,12 +24,17 @@ class TileCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('description'),
+            TextField::new('description')
+                ->setHelp('The description is show on the tile in the mosaic.'),
             ImageField::new('image')->setUploadDir('/public/tiles'),
-            AssociationField::new('tags')->hideOnIndex()->setRequired(true),
-            EmailField::new('mail'),
-            BooleanField::new('accepted'),
-            CodeEditorField::new('extra')->hideOnIndex(),
+            AssociationField::new('tags')->hideOnIndex()->setRequired(true)
+                ->setHelp('Tags are used to decide on which screens this tile should be displayed.'),
+            EmailField::new('mail')
+                ->setHelp('Mail address is required for user uploaded images in the case of "aktindsigt" requests.'),
+            BooleanField::new('accepted')
+                ->setHelp('Tile is only display on screens if they have been accepted.'),
+            CodeEditorField::new('extra')->hideOnIndex()
+                ->setHelp('All extra fields from "selvbetjening" from is encoded as json in this field.'),
             DateField::new('createdAt')->hideOnForm(),
             DateField::new('updatedAt')->hideOnForm(),
         ];

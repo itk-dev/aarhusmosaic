@@ -28,19 +28,26 @@ class ScreenCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('title'),
-            IntegerField::new('gridColumns'),
-            IntegerField::new('gridRows'),
+            TextField::new('title')
+                ->setHelp('The title is only used in this administrative user interface. So use something that makes it easy to identify later on.'),
+            IntegerField::new('gridColumns')
+                ->setHelp('Number of columns to use on the screen.'),
+            IntegerField::new('gridRows')
+                ->setHelp('Number of rows to use on the screen.'),
             TextField::new('screenUrl')
                 ->setLabel('Url')
                 ->setDisabled(true)
                 // This only applies to index and detail pages.
                 ->formatValue(function ($value) {
                     return $this->router->generate('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL).$value;
-                }),
-            AssociationField::new('apiUser')->hideOnIndex()->setRequired(true),
-            AssociationField::new('tags')->hideOnIndex()->setRequired(true),
-            CodeEditorField::new('variant')->hideOnIndex(),
+                })
+                ->setHelp('Not editable. Will be generated base one the screen ID and API user selected.'),
+            AssociationField::new('apiUser')->hideOnIndex()->setRequired(true)
+                ->setHelp('The API user that should be used to access this screen.'),
+            AssociationField::new('tags')->hideOnIndex()->setRequired(true)
+                ->setHelp('Filter screen content based on these tags. If more than one tag is selected, all tags are required on a tile to display it on the screen.'),
+            CodeEditorField::new('variant')->hideOnIndex()
+                ->setHelp('Paste this text and correct as desired: {"showIcons":false,"showBorders":false,"gridExpose":2,"exposeShowBorder":true,"exposeShowIcon":true,"mosaicLogo":true,"exposeTimeout":4} '),
             DateField::new('createdAt')->hideOnForm()->hideOnIndex(),
             DateField::new('updatedAt')->hideOnForm(),
         ];
