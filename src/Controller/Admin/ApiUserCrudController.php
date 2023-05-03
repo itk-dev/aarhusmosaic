@@ -38,6 +38,7 @@ class ApiUserCrudController extends AbstractCrudController
 
         $user = new ApiUser();
         $user->setToken($token);
+
         return $user;
     }
 }
