@@ -122,7 +122,8 @@ function Mosaic() {
         }
 
         const gridColumns = screen.gridColumns ?? 6;
-        const gridRows = screen.gridColumns ?? 6;
+        //const gridRows = screen.gridColumns ?? 6;
+        const gridRows = config.variant.footerHeight ? screen.gridRows - config.variant.footerHeight : screen.gridRows ?? 6;
         const numberOfTiles = gridColumns * gridRows;
 
         let variant;
@@ -229,12 +230,22 @@ function Mosaic() {
                         }
                     </TransitionGroup>
 
+                    {/* Show footer */}
+                    {config?.variant?.footerHeight &&
+                      <Footer
+                        footerHeight={config.variant.footerHeight}
+                        footerImageSrc={config.variant.footerHeight}
+                        footerBackgroundColor={config.variant.footerHeight}
+                      />
+                    }
+                    {/* Show Ctabox - Only if a footer is not already present */}
                     {config?.variant?.ctaBoxTitle && <CtaBox
                       title={config.variant.ctaBoxTitle}
                       description={config.variant.ctaBoxDescription}
                       image={config.variant.ctaBoxImage}
                       backgroundColor={config.variant.ctaBoxBackgroundColor}
                     />}
+                    {/* Show Logo - Only if a footer is not already present */}
                     {config?.variant?.mosaicLogo && <Logo/>}
 
                     <GlobalStyles config={config}/>
