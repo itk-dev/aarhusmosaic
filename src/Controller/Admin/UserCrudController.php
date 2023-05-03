@@ -33,7 +33,8 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('email'),
+            TextField::new('email')
+                ->setHelp('Users mail address, which is also used as login name'),
             TextField::new('password')
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
