@@ -19,13 +19,13 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Screen.jsonld'
+                $ref: '#/components/schemas/Screen.jsonld-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Screen'
+                $ref: '#/components/schemas/Screen-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Screen'
+                $ref: '#/components/schemas/Screen-read'
         404:
           description: 'Resource not found'
       summary: 'Retrieves a Screen resource.'
@@ -180,6 +180,32 @@ paths:
           style: form
           explode: false
           allowReserved: false
+        -
+          name: tags.tag
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: string
+          style: form
+          explode: false
+          allowReserved: false
+        -
+          name: 'tags.tag[]'
+          in: query
+          description: ''
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+          allowReserved: false
       deprecated: false
     parameters: []
   /api/v1/tiles/random:
@@ -221,6 +247,28 @@ paths:
           required: true
           description: 'Limit number of results (Max Tiles returned is 100)'
           example: '15'
+        -
+          name: tags.tag
+          in: query
+          required: false
+          schema:
+            type: string
+          allowEmptyValue: true
+          style: form
+          explode: true
+          allowReserved: false
+        -
+          name: 'tags.tag[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          allowEmptyValue: true
+          style: form
+          explode: true
+          allowReserved: false
       deprecated: false
     parameters: []
   '/api/v1/tiles/{id}':
@@ -300,7 +348,7 @@ paths:
     parameters: []
 components:
   schemas:
-    Screen:
+    Screen-read:
       type: object
       description: ''
       deprecated: false
@@ -316,13 +364,11 @@ components:
           type: integer
         variant:
           type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-    Screen.jsonld:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tags-read'
+    Screen.jsonld-read:
       type: object
       description: ''
       deprecated: false
@@ -361,12 +407,10 @@ components:
           type: integer
         variant:
           type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tags.jsonld-read'
     Tags-read:
       type: object
       description: ''

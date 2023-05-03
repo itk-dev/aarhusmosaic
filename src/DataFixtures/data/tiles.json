@@ -104,7 +104,7 @@
     "image": "tiles/test-photo-7.jpg",
     "mail": "itkdev@mkb.aarhus.dk",
     "accepted": false,
-    "tags": ["klima", "theoceanrace"],
+    "tags": ["theoceanrace"],
     "extra": {
       "variant": "fourteen"
     }
@@ -115,7 +115,7 @@
     "image": "tiles/test-photo-9.jpg",
     "mail": "itkdev@mkb.aarhus.dk",
     "accepted": true,
-    "tags": ["klima", "theoceanrace"],
+    "tags": ["theoceanrace"],
     "extra": {
       "variant": "sixteen"
     }
@@ -126,7 +126,7 @@
     "image": "tiles/test-photo-27.jpg",
     "mail": "itkdev@mkb.aarhus.dk",
     "accepted": false,
-    "tags": ["klima", "theoceanrace"],
+    "tags": ["theoceanrace"],
     "extra": {
       "variant": "one"
     }
@@ -137,7 +137,7 @@
     "image": "tiles/test-photo-19.jpg",
     "mail": "itkdev@mkb.aarhus.dk",
     "accepted": true,
-    "tags": ["klima", "theoceanrace"],
+    "tags": ["theoceanrace"],
     "extra": {
       "variant": "ten"
     }
@@ -148,7 +148,7 @@
     "image": "tiles/test-photo-4.jpg",
     "mail": "itkdev@mkb.aarhus.dk",
     "accepted": true,
-    "tags": ["klima", "theoceanrace"],
+    "tags": ["theoceanrace"],
     "extra": {
       "variant": "four"
     }
@@ -159,7 +159,7 @@
     "image": "tiles/test-photo-9.jpg",
     "mail": "itkdev@mkb.aarhus.dk",
     "accepted": true,
-    "tags": ["klima", "theoceanrace"],
+    "tags": ["theoceanrace"],
     "extra": {
       "variant": "fifteen"
     }
@@ -170,7 +170,7 @@
     "image": "tiles/test-photo-6.jpg",
     "mail": "itkdev@mkb.aarhus.dk",
     "accepted": true,
-    "tags": ["klima", "theoceanrace"],
+    "tags": ["theoceanrace"],
     "extra": {
       "variant": "eight"
     }

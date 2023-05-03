@@ -19,7 +19,9 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Fixed tiles image path
 - Fixed defaults when tile.extra or screen.variant are not parsable.
 - Changed tags input format "tag1,tag2,tag3" in webhook callback.
-- Ensure uniq id for upload filenames (to safeguard file override). 
+- Ensure uniq id for upload filenames (to safeguard file override).
+- Added tags filtering to tile's API end-point.
+- Added api user to screen and generated frontend URL in screen admin.
 
 ### Added
 - Ctabox in frontend

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
@@ -16,10 +17,12 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TileRepository::class)]
+#[ApiFilter(OrderFilter::class, properties: ['updatedAt', 'name'], arguments: ['orderParameterName' => 'order'])]
+#[ApiFilter(SearchFilter::class, properties: ['tags.tag' => 'exact'])]
 #[ApiResource(
     operations: [
         new Get(
-            priority: 10
+            priority: 10,
         ),
         new GetCollection(
             uriTemplate: '/tiles/random',
@@ -33,6 +36,33 @@ use Symfony\Component\Serializer\Annotation\Groups;
                         'required' => true,
                         'description' => 'Limit number of results (Max Tiles returned is 100)',
                         'example' => '15',
+                    ],
+                    [
+                        'name' => 'tags.tag',
+                        'in' => 'query',
+                        'required' => false,
+                        'schema' => [
+                            'type' => 'string',
+                        ],
+                        'allowEmptyValue' => true,
+                        'style' => 'form',
+                        'explode' => true,
+                        'allowReserved' => false,
+                    ],
+                    [
+                        'name' => 'tags.tag[]',
+                        'in' => 'query',
+                        'required' => false,
+                        'schema' => [
+                            'type' => 'array',
+                            'items' => [
+                                'type' => 'string',
+                            ],
+                        ],
+                        'allowEmptyValue' => true,
+                        'style' => 'form',
+                        'explode' => true,
+                        'allowReserved' => false,
                     ],
                 ],
             ],
@@ -48,7 +78,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
     paginationEnabled: true,
     security: "is_granted('ROLE_API_USER')"
 )]
-#[ApiFilter(OrderFilter::class, properties: ['updatedAt', 'name'], arguments: ['orderParameterName' => 'order'])]
 class Tile
 {
     use TimestampableEntity;
