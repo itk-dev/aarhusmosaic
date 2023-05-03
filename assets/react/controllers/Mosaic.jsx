@@ -43,7 +43,7 @@ function Mosaic() {
         const randomPath = config.randomTiles ? '/random' : "";
 
         const screenTags = screen.tags.map(tag =>
-          `tags.tag[]=` + tag.tag
+          `tags.tag[]=` + tag.tag  + `&`
         );
 
         fetch(`/api/v1/tiles${randomPath}?${screenTags}` + new URLSearchParams({
