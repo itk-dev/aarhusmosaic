@@ -26,7 +26,7 @@ class TileCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('description')
                 ->setHelp('The description is show on the tile in the mosaic.'),
-            ImageField::new('image')->setUploadDir('/public/tiles'),
+            ImageField::new('image')->setUploadDir('/public/tiles')->hideWhenUpdating(),
             AssociationField::new('tags')->hideOnIndex()->setRequired(true)
                 ->setHelp('Tags are used to decide on which screens this tile should be displayed.'),
             EmailField::new('mail')
