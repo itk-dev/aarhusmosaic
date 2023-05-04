@@ -56,6 +56,7 @@ Following parameters is possible to configure from the `screen` -> `variant` fie
 | exposeShowBorder      | true,false    | `"exposeShowBorder":false` |
 | exposeShowIcon        | true,false    | `"exposeShowIcon":false` |
 | exposeTimeout         | 1-9           | `"exposeTimeout":7` |
+| exposeFontSize        | xs,s,m,l,xl   | `"exposeFontSize":"m"` |
 | Logo |
 | mosaicLogo            | true,false    | `"exposeShowIcon":false` |
 | Footer |
@@ -64,12 +65,12 @@ Following parameters is possible to configure from the `screen` -> `variant` fie
 | footerBackgroundColor | Hex format    | `"footerBackgroundColor":"#F4DCEA"` |
 | Cta box |
 | ctaBoxTitle           | Text          | `"ctaBoxTitle":"Del dit billede"` |
-| ctaBoxDescription     | Text          | `"ctaBoxDescription":"Skan koden og indsend dit bidrag, for at blive en del af denne mosaik."` |
+| ctaBoxDescription     | Text          | `"ctaBoxDescription":"Skan koden og indsend dit bidrag"` |
 | ctaBoxImage           | Url           | `"https://pathtoimagesource.io/ctaimage.svg"` |
 | ctaBoxBackgroundColor | Hex format    | `"ctaBoxBackgroundColor":"#fff"` |
 
 ### Example
 
 ```json
-{"showIcons":false,"showBorders":false,"gridExpose":2,"exposeShowBorder":true,"exposeShowIcon":true,"mosaicLogo":true,"exposeTimeout":14,"ctaBoxTitle":"Del dit billede","ctaBoxDescription":"Skan koden og indsend dit bidrag, for at blive en del af denne mosaik.","ctaBoxImage":"https:\/\/qr-codes-svg.s3.amazonaws.com\/jpTJHD.svg?1680006094578","ctaBoxBackgroundColor":"#fff","exposeFontSize":"xl","footerHeight":"1","footerImageSrc":"./footer.png","footerBackgroundColor":"#F4DCEA"}
+{"showIcons":false,"showBorders":false,"gridExpose":2,"exposeShowBorder":false,"exposeShowIcon":false,"mosaicLogo":false,"exposeTimeout":14,"ctaBoxTitle":false,"ctaBoxDescription":"Skan koden og indsend dit bidrag","ctaBoxImage":"./qr.svg","ctaBoxBackgroundColor":"#fff","exposeFontSize":"m","footerHeight":"1","footerImageSrc":"./footer.png","footerBackgroundColor":"#F4DCEA"}
 ```
