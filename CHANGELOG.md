@@ -12,6 +12,7 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 ## [Unreleased]
 
 - Add tileTags filter.
+- Add configurable footer
 - Sort tiles last changed first.
 - Add possibility of switching between random and sorted data
 - Fixed that /random should not show not accepted tiles
@@ -26,6 +27,7 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Added admin UI help texts and auto-generated tokens for new api-users
 
 ### Added
+
 - Ctabox in frontend
 - Frontend config for font size
 - Frontend config for icons and logo
