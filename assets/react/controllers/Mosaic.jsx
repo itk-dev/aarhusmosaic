@@ -139,8 +139,6 @@ function Mosaic() {
         const gridRows = variant.footerHeight ? totalRows - variant.footerHeight : totalRows ?? 5;
         const numberOfTiles = gridColumns * gridRows;
 
-        console.log(variant.footerHeight);
-
         setConfig({
             gridColumns,
             gridRows,
