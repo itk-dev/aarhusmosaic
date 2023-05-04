@@ -20,12 +20,6 @@ const Wrapper = styled.div`
   height: calc((100vh / var(--total-rows)) * var(--footer-height));
   display: grid;
   place-content: center;
-
-  @media (orientation: portrait) {
-    /* flex-direction: column-reverse;
-    align-items: flex-start;
-    row-gap: calc(var(--border-width) * 2); */
-  }
 `;
 
 const Img = styled.img`
