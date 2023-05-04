@@ -6,9 +6,9 @@ function Footer({footerHeight, footerImageSrc, footerBackgroundColor}) {
   return (
     <Wrapper style={{
         '--background-color': footerBackgroundColor,
-        '--footer-height': footerHeight
+        '--footer-height': footerHeight,
     }}>
-      <Img src={footerImageSrc} alt=""/>
+      <Img src={footerImageSrc} alt="test"/>
     </Wrapper>
   );
 }
@@ -17,7 +17,9 @@ const Wrapper = styled.div`
   background-color: var(--background-color, hsl(0deg 0% 100%));
   filter: var(--filter-shadow);
   width: 100vw;
-  height: calc((100vh / var(--grid-rows)) * var(--footer-height));
+  height: calc((100vh / var(--total-rows)) * var(--footer-height));
+  display: grid;
+  place-content: center;
 
   @media (orientation: portrait) {
     /* flex-direction: column-reverse;
@@ -27,9 +29,8 @@ const Wrapper = styled.div`
 `;
 
 const Img = styled.img`
-  max-height: calc(((100vh / var(--grid-rows))*0.5) - calc(var(--border-width) * 6));
+  max-height: 100%;
   width: auto;
-  border: 1px solid hsl(0, 0%, 80%);
 `;
 
 Footer.propTypes = {
