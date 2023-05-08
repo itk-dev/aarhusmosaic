@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   grid-template-rows: repeat(var(--grid-rows), 1fr);
   grid-template-columns: repeat(var(--grid-columns), 1fr);
   gap: 0;
+  height: calc((100vh / var(--total-rows)) * var(--grid-rows))
 `;
 
 export default Grid;

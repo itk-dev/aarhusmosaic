@@ -7,6 +7,7 @@ import LoaderSrc from "../assets/icons/loader.svg";
 import {CenteredContent} from "../components/centered-content";
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 import CtaBox from "../components/cta-box";
+import Footer from "../components/footer";
 
 function Mosaic() {
     const TILES_LOADING_INTERVAL = 60 * 1000 * 5;
@@ -121,10 +122,6 @@ function Mosaic() {
             return;
         }
 
-        const gridColumns = screen.gridColumns ?? 6;
-        const gridRows = screen.gridColumns ?? 6;
-        const numberOfTiles = gridColumns * gridRows;
-
         let variant;
 
         try {
@@ -137,10 +134,15 @@ function Mosaic() {
         }
 
         const randomTiles = variant.randomTiles ?? true;
+        const gridColumns = screen.gridColumns ?? 6;
+        const totalRows = screen.gridRows ?? 5;
+        const gridRows = variant.footerHeight ? totalRows - variant.footerHeight : totalRows ?? 5;
+        const numberOfTiles = gridColumns * gridRows;
 
         setConfig({
             gridColumns,
             gridRows,
+            totalRows,
             numberOfTiles,
             randomTiles,
             variant,
@@ -194,7 +196,7 @@ function Mosaic() {
             )}
             {!errorMessage && config && tiles.length > 0 && (
                 <div className="App">
-                    <Grid style={{'--grid-columns': config.gridColumns, '--grid-rows': config.gridRows}}>
+                    <Grid style={{'--grid-columns': config.gridColumns, '--grid-rows': config.gridRows, '--total-rows': config.totalRows}}>
                         {tiles.map((tile) => (
                             <GridItem
                                 key={tile['@id']}
@@ -229,12 +231,22 @@ function Mosaic() {
                         }
                     </TransitionGroup>
 
+                    {/* Show footer */}
+                    {config?.variant?.footerHeight &&
+                      <Footer
+                        footerHeight={config.variant.footerHeight}
+                        footerImageSrc={config.variant.footerImageSrc}
+                        footerBackgroundColor={config.variant.footerBackgroundColor}
+                      />
+                    }
+                    {/* TODO: Only show Ctabox if a footer is not already present */}
                     {config?.variant?.ctaBoxTitle && <CtaBox
                       title={config.variant.ctaBoxTitle}
                       description={config.variant.ctaBoxDescription}
                       image={config.variant.ctaBoxImage}
                       backgroundColor={config.variant.ctaBoxBackgroundColor}
                     />}
+                    {/* TODO: Only show Logo if a footer is not already present */}
                     {config?.variant?.mosaicLogo && <Logo/>}
 
                     <GlobalStyles config={config}/>
