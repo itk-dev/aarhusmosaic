@@ -11,6 +11,7 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 
+- Fix image in footer
 - Add tileTags filter.
 - Add configurable footer
 - Sort tiles last changed first.
