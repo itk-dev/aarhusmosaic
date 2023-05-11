@@ -11,9 +11,18 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 
+
+## [1.0.0-beta2] - 2023-05-12
+
 - Fix image in footer
+
+## [1.0.0-beta2] - 2023-05-11
+
 - Add tileTags filter.
 - Add configurable footer
+
+## [1.0.0-beta1] - 2023-05-10
+
 - Sort tiles last changed first.
 - Add possibility of switching between random and sorted data
 - Fixed that /random should not show not accepted tiles
