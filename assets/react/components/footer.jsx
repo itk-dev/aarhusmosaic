@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 `;
 
 const Img = styled.img`
-  max-height: 100%;
+  max-height: calc((100vh / var(--total-rows)) * var(--footer-height));
   width: auto;
 `;
 
