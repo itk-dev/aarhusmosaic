@@ -82,6 +82,7 @@ const GlobalStyles = createGlobalStyle`
     */
     --grid-columns: ${props => props.config.gridColumns};
     --grid-rows: ${props => props.config.gridRows};
+    --total-rows: ${props => props.config.totalRows};
     --grid-expose: ${props => props.config.variant.gridExpose ?? 3};
 
     /*

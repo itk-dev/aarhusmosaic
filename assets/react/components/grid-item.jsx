@@ -63,7 +63,7 @@ const Item = styled.div`
   border-width: var(--border-width);
   border-color: transparent;
   width: calc(100vw / var(--grid-columns));
-  height: calc(100vh / var(--grid-rows));
+  height: calc(100vh / var(--total-rows));
   overflow: hidden;
 
   &::before {
@@ -207,7 +207,7 @@ const Item = styled.div`
 
   .exposed & {
     width: calc((100vw / var(--grid-columns)) * var(--grid-expose));
-    height: calc((100vh / var(--grid-rows)) * var(--grid-expose));
+    height: calc((100vh / var(--total-rows)) * var(--grid-expose));
     animation: expose;
     animation-duration: 1.2s;
     transform-origin: bottom;
@@ -227,7 +227,7 @@ const Item = styled.div`
 const Wrapper = styled.div`
   &.exposed {
     position: absolute;
-    top: calc(100vh / var(--grid-rows));
+    top: calc(100vh / var(--total-rows));
     left: calc(100vw / var(--grid-columns));
   }
 `;
