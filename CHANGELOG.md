@@ -11,9 +11,11 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 
+## [1.0.0-beta4] - 2023-05-17
+
 - Add more padding to expose text
 
-## [1.0.0-beta2] - 2023-05-12
+## [1.0.0-beta3] - 2023-05-12
 
 - Fix image in footer
 
