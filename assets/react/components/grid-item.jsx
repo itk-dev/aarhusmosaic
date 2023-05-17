@@ -37,7 +37,7 @@ const ItemDescription = styled.p`
   color: white;
   position: absolute;
   bottom: 22%;
-  left: 1%;
+  left: 3%;
   width: 85%;
   display: -webkit-box;
   -webkit-box-orient: vertical;

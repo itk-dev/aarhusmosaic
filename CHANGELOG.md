@@ -11,6 +11,7 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 
+- Add more padding to expose text
 
 ## [1.0.0-beta2] - 2023-05-12
 
