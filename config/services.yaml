@@ -23,6 +23,10 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    App\Command\RemoveUnusedImagesCommand:
+        arguments:
+            $imagePath: '%kernel.project_dir%/public/tiles'
+
     App\OpenApi\OpenApiFactory:
         decorates: 'api_platform.openapi.factory'
         arguments: [ '@App\OpenApi\OpenApiFactory.inner' ]

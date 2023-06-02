@@ -31,8 +31,6 @@ class ScaleImageCommand extends Command
     }
 
     /**
-     * @todo: needs way better input validation.
-     *
      * {@inheritDoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
