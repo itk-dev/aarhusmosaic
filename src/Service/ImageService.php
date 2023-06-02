@@ -163,7 +163,10 @@ class ImageService
                     break;
             }
             if ($deg) {
-                $image = imagerotate($image, $deg, 0) ?? $image;
+                $newImage = imagerotate($image, $deg, 0);
+                if (false !== $newImage) {
+                    $image = $newImage;
+                }
             }
         }
 

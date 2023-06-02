@@ -3,14 +3,11 @@
 namespace App\Command;
 
 use App\Repository\TileRepository;
-use App\Service\ImageService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 
 #[AsCommand(
     name: 'app:image:unused-remove',
@@ -48,7 +45,7 @@ class RemoveUnusedImagesCommand extends Command
             $tile = $this->tileRepository->findOneBy(['image' => $filename]);
             if (is_null($tile)) {
                 unlink($absolutePath);
-                $count++;
+                ++$count;
                 $output->write('.');
             }
         }
