@@ -2,13 +2,11 @@
 
 namespace App\Command;
 
-use App\Entity\User;
 use App\Repository\TileRepository;
 use App\Service\ImageService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -49,9 +47,9 @@ class ScaleImageCommand extends Command
 
         $count = 0;
         foreach ($iterator as $tile) {
-            $count++;
+            ++$count;
             $progressBar->setMessage(sprintf('Tile id %s with image %s (total: %s)', $tile->getId(), $tile->getImage(), $count));
-            $this->imageService->scaleDownLongestSide($tile->getImage());
+            $this->imageService->scaleDown($tile->getImage());
             $progressBar->advance();
         }
         $progressBar->finish();

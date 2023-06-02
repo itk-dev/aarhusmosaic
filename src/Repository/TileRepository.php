@@ -6,7 +6,6 @@ use App\Entity\Tile;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
-use phpDocumentor\Reflection\Utils;
 
 /**
  * @extends ServiceEntityRepository<Tile>
@@ -86,5 +85,4 @@ class TileRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')->getQuery()->toIterable();
     }
-
 }

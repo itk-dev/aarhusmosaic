@@ -11,6 +11,10 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 
+- Added new image service to scale down images
+- Added command to loop over images and scale them down
+- Added image scaling to new webhook download
+
 ## [1.0.0-beta4] - 2023-05-17
 
 - Add more padding to expose text

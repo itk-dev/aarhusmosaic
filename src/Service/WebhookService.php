@@ -99,7 +99,7 @@ class WebhookService
         }
 
         // Scale down images.
-        $this->imageService->scaleDownLongestSide($dest);
+        $this->imageService->scaleDown($dest);
 
         $this->metricsService->counter('webhook_image_completed_total', 'Webhook download image successful downloaded counter', 1, ['type' => 'webhook']);
 
