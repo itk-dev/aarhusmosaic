@@ -18,7 +18,8 @@ class WebhookService
     public function __construct(
         private readonly string $projectDir,
         private readonly HttpClientInterface $client,
-        private readonly MetricsService $metricsService
+        private readonly MetricsService $metricsService,
+        private readonly ImageService $imageService
     ) {
     }
 
@@ -96,6 +97,9 @@ class WebhookService
         foreach ($this->client->stream($response) as $chunk) {
             fwrite($fileHandler, $chunk->getContent());
         }
+
+        // Scale down images.
+        $this->imageService->scaleDown($dest);
 
         $this->metricsService->counter('webhook_image_completed_total', 'Webhook download image successful downloaded counter', 1, ['type' => 'webhook']);
 

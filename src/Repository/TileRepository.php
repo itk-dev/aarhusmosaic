@@ -80,4 +80,9 @@ class TileRepository extends ServiceEntityRepository
 
         return $tiles;
     }
+
+    public function getIterator(): iterable
+    {
+        return $this->createQueryBuilder('t')->getQuery()->toIterable();
+    }
 }
