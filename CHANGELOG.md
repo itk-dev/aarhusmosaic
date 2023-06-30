@@ -11,6 +11,8 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 
+## [1.0.0] - 2023-06-29
+
 - Added new image service to scale down images
 - Added command to loop over images and scale them down
 - Added image scaling to new webhook download
