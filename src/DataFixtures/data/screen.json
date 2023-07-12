@@ -11,7 +11,8 @@
       "exposeShowBorder": true,
       "exposeShowIcon": true,
       "mosaicLogo": true,
-      "exposeTimeout": 7
+      "exposeTimeout": 7,
+      "colors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
     },
     "tags": ["klima", "theoceanrace"]
   },
@@ -27,7 +28,8 @@
       "exposeShowBorder": true,
       "exposeShowIcon": true,
       "mosaicLogo": false,
-      "exposeTimeout": 5
+      "exposeTimeout": 5,
+      "colors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
     },
     "tags": ["klima", "theoceanrace"]
   },
@@ -43,7 +45,8 @@
       "exposeShowBorder": false,
       "exposeShowIcon": false,
       "mosaicLogo": true,
-      "exposeTimeout": 5
+      "exposeTimeout": 5,
+      "colors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
     },
     "tags": ["klima"]
   },
@@ -64,7 +67,8 @@
       "ctaBoxDescription": "Skan koden og indsend dit bidrag, for at blive en del af denne mosaik.",
       "ctaBoxImage": "https://qr-codes-svg.s3.amazonaws.com/jpTJHD.svg?1680006094578",
       "ctaBoxBackgroundColor": "white",
-      "exposeFontSize": "xl"
+      "exposeFontSize": "xl",
+      "colors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
     },
     "tags": ["theoceanrace"]
   }
