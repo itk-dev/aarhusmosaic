@@ -41,20 +41,21 @@
     "apply-coding-standards": "npm run lint:js:fix"
   },
   "dependencies": {
-    "@fontsource/inter": "^4.5.15",
-    "@symfony/ux-react": "file:vendor/symfony/ux-react/assets",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
-    "react-router-dom": "^6.8.2",
-    "webpack": "^5.76.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-notifier": "^1.15.0",
+    "@fontsource/inter": "^4.5.15",
+    "@symfony/stimulus-bridge": "^3.2.1",
+    "@symfony/ux-react": "file:vendor/symfony/ux-react/assets",
+    "hex-to-rgba": "^2.0.1",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.2",
     "react-transition-group": "^4.4.5",
     "styled-components": "^5.3.8",
-    "@symfony/stimulus-bridge": "^3.2.1",
-    "prop-types": "^15.8.1"
+    "webpack": "^5.76.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-notifier": "^1.15.0"
   }
 }

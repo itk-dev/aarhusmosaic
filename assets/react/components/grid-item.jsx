@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import hexToRgba from "hex-to-rgba";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Icon from "./icon";
@@ -14,30 +15,43 @@ function GridItem({
   color,
 }) {
   const [imageReady, setImageReady] = useState(false);
+
   return (
     <Wrapper className={exposed ? "exposed" : ""}>
       <ContentWrapper>
-        {!imageReady && <Skeleton style={{ "--skeleton-color": color }} />}
-        <Item
-          onLoad={() => setImageReady(true)}
-          src={image}
-          className={variant}
-          style={{
-            // '--background-image': `url(${image}`,
-            "--border-width": tileBorders ? "var(--tile-border-width)" : 0,
-            "--overlay-opacity": tileBorders ? "0.1" : "0",
-          }}
-        />
-        {exposed && (
-          <ItemDescription
+        {!imageReady && (
+          <Skeleton
             style={{
-              "--text-size": `var(--font-size-${exposeFontSize})`,
+              "--skeleton-color-1": hexToRgba(color, 0.4),
+              "--skeleton-color-2": hexToRgba(color, 0.7),
+              "--skeleton-color-3": hexToRgba(color, 1),
             }}
-          >
-            {description}
-          </ItemDescription>
+          />
         )}
-        {tileIcons && <ItemIcon src={Icon[variant]} alt="" />}
+        {imageReady && (
+          <>
+            <Item
+              onLoad={() => setImageReady(true)}
+              src={image}
+              className={variant}
+              style={{
+                "--border-width": tileBorders ? "var(--tile-border-width)" : 0,
+                "--overlay-opacity": tileBorders ? "0.1" : "0",
+              }}
+            />
+
+            {exposed && (
+              <ItemDescription
+                style={{
+                  "--text-size": `var(--font-size-${exposeFontSize})`,
+                }}
+              >
+                {description}
+              </ItemDescription>
+            )}
+            {tileIcons && <ItemIcon src={Icon[variant]} alt="" />}
+          </>
+        )}
       </ContentWrapper>
     </Wrapper>
   );
@@ -85,17 +99,28 @@ const ItemIcon = styled.img`
 `;
 
 const Skeleton = styled.div`
-  height: 100%;
-  animation: skeleton-loading 1s linear infinite alternate;
-  @keyframes skeleton-loading {
+  @keyframes gradient {
     0% {
-      background-color: var(--skeleton-color);
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
     }
     100% {
-      background-color: var(--skeleton-color);
-      filter: brightness(125%);
+      background-position: 0% 50%;
     }
   }
+
+  width: calc(100vw / var(--grid-columns));
+  height: calc(100vh / var(--total-rows));
+  background: linear-gradient(
+    -45deg,
+    var(--skeleton-color-3),
+    var(--skeleton-color-2),
+    var(--skeleton-color-1)
+  );
+  background-size: 400% 400%;
+  animation: gradient 2s ease infinite;
 `;
 
 const ContentWrapper = styled.div`
