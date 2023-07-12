@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 import "@fontsource/inter/700.css";
 import "@fontsource/inter/400.css";
 
@@ -80,10 +80,10 @@ const GlobalStyles = createGlobalStyle`
     /*
       Grid settings
     */
-    --grid-columns: ${props => props.config.gridColumns};
-    --grid-rows: ${props => props.config.gridRows};
-    --total-rows: ${props => props.config.totalRows};
-    --grid-expose: ${props => props.config.variant.gridExpose ?? 3};
+    --grid-columns: ${(props) => props.config.gridColumns};
+    --grid-rows: ${(props) => props.config.gridRows};
+    --total-rows: ${(props) => props.config.totalRows};
+    --grid-expose: ${(props) => props.config.variant.gridExpose ?? 3};
 
     /*
       Font
@@ -105,7 +105,8 @@ const GlobalStyles = createGlobalStyle`
     /*
       Border
     */
-    --tile-border-width: ${props => props.config.variant.tileBorderWidth ?? 5}px;
+    --tile-border-width: ${(props) =>
+      props.config.variant.tileBorderWidth ?? 5}px;
     --border-width: var(--tile-border-width);
 
     /*

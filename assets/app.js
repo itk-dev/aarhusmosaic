@@ -5,13 +5,13 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-import { registerReactControllerComponents } from '@symfony/ux-react';
+import { registerReactControllerComponents } from "@symfony/ux-react";
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+import "./styles/app.css";
 
 // start the Stimulus application
-import './bootstrap';
+import "./bootstrap";
 
 // Registers React controller components to allow loading them from Twig
 //
@@ -22,4 +22,6 @@ import './bootstrap';
 // By putting only controller components in `react/controllers`, you ensure that
 // internal components won't be automatically included in your JS built file if
 // they are not necessary.
-registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/));
+registerReactControllerComponents(
+  require.context("./react/controllers", true, /\.(j|t)sx?$/),
+);

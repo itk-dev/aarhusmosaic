@@ -1,33 +1,63 @@
-import React from "react";
-import styled from 'styled-components'
-import Icon from './icon';
+import React, { useState } from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
+import Icon from "./icon";
 
-function GridItem({variant, description, image, exposed, tileIcons, tileBorders, exposeFontSize}) {
-    return (
-        <Wrapper className={exposed ? "exposed" : ""}>
-            <Item className={variant} style={{
-                '--background-image': `url(${image}`,
-                '--border-width': tileBorders ? 'var(--tile-border-width)' : 0,
-                '--overlay-opacity': tileBorders ? '0.1' : '0'
-            }}>
-                {exposed && <ItemDescription style={{
-                      '--text-size': `var(--font-size-${exposeFontSize})`
-                  }}>{description}</ItemDescription>}
-                {tileIcons && <ItemIcon src={Icon[variant]} alt=""/>}
-            </Item>
-        </Wrapper>
-    );
+function GridItem({
+  variant,
+  description,
+  image,
+  exposed,
+  tileIcons,
+  tileBorders,
+  exposeFontSize,
+  color,
+}) {
+  const [imageReady, setImageReady] = useState(false);
+  return (
+    <Wrapper className={exposed ? "exposed" : ""}>
+      <ContentWrapper>
+        {!imageReady && <Skeleton style={{ "--skeleton-color": color }} />}
+        <Item
+          onLoad={() => setImageReady(true)}
+          src={image}
+          className={variant}
+          style={{
+            // '--background-image': `url(${image}`,
+            "--border-width": tileBorders ? "var(--tile-border-width)" : 0,
+            "--overlay-opacity": tileBorders ? "0.1" : "0",
+          }}
+        />
+        {exposed && (
+          <ItemDescription
+            style={{
+              "--text-size": `var(--font-size-${exposeFontSize})`,
+            }}
+          >
+            {description}
+          </ItemDescription>
+        )}
+        {tileIcons && <ItemIcon src={Icon[variant]} alt="" />}
+      </ContentWrapper>
+    </Wrapper>
+  );
 }
 
+GridItem.defaultProps = {
+  exposed: false,
+  tileIcons: null,
+  tileBorders: false,
+  exposeFontSize: "",
+};
+
 GridItem.propTypes = {
-    variant: PropTypes.string,
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    exposed: PropTypes.bool,
-    tileIcons: PropTypes.bool,
-    tileBorders: PropTypes.bool,
-    exposeFontSize: PropTypes.string,
+  variant: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  exposed: PropTypes.bool,
+  tileIcons: PropTypes.bool,
+  tileBorders: PropTypes.bool,
+  exposeFontSize: PropTypes.string,
 };
 
 const ItemDescription = styled.p`
@@ -54,9 +84,27 @@ const ItemIcon = styled.img`
   height: 20%;
 `;
 
-const Item = styled.div`
+const Skeleton = styled.div`
+  height: 100%;
+  animation: skeleton-loading 1s linear infinite alternate;
+  @keyframes skeleton-loading {
+    0% {
+      background-color: var(--skeleton-color);
+    }
+    100% {
+      background-color: var(--skeleton-color);
+      filter: brightness(125%);
+    }
+  }
+`;
+
+const ContentWrapper = styled.div`
   position: relative;
-  background-image: var(--background-image);
+`;
+
+const Item = styled.img`
+  object-fit: cover;
+  position: relative;
   background-position: center;
   background-size: cover;
   border-style: solid;

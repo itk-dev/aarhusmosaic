@@ -1,13 +1,15 @@
 import React from "react";
-import styled from 'styled-components'
+import styled from "styled-components";
 import PropTypes from "prop-types";
 
-function CtaBox({title, description, image, backgroundColor}) {
+function CtaBox({ title, description, image, backgroundColor }) {
   return (
-    <Wrapper style={{
-        '--background-color': backgroundColor
-    }}>
-      {image && <Img src={image} alt=""/>}
+    <Wrapper
+      style={{
+        "--background-color": backgroundColor,
+      }}
+    >
+      {image && <Img src={image} alt="" />}
       <div>
         <Title>{title}</Title>
         {description && <Description>{description}</Description>}
@@ -18,7 +20,9 @@ function CtaBox({title, description, image, backgroundColor}) {
 
 const Wrapper = styled.div`
   position: fixed;
-  max-width: calc(((100vw / var(--grid-columns))*2) - calc(var(--border-width) * 6));
+  max-width: calc(
+    ((100vw / var(--grid-columns)) * 2) - calc(var(--border-width) * 6)
+  );
   bottom: calc(var(--border-width) * 3);
   left: calc(var(--border-width) * 3);
   background-color: var(--background-color, hsl(0deg 0% 100%));
@@ -49,16 +53,18 @@ const Description = styled.p`
 `;
 
 const Img = styled.img`
-  max-height: calc(((100vh / var(--grid-rows))*0.5) - calc(var(--border-width) * 6));
+  max-height: calc(
+    ((100vh / var(--grid-rows)) * 0.5) - calc(var(--border-width) * 6)
+  );
   width: auto;
   border: 1px solid hsl(0, 0%, 80%);
 `;
 
 CtaBox.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  image: PropTypes.string,
-  backgroundColor: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  backgroundColor: PropTypes.string.isRequired,
 };
 
 export default CtaBox;
