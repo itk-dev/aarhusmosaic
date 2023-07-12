@@ -28,30 +28,28 @@ function GridItem({
             }}
           />
         )}
-        {imageReady && (
-          <>
-            <Item
-              onLoad={() => setImageReady(true)}
-              src={image}
-              className={variant}
-              style={{
-                "--border-width": tileBorders ? "var(--tile-border-width)" : 0,
-                "--overlay-opacity": tileBorders ? "0.1" : "0",
-              }}
-            />
+        <>
+          <Item
+            onLoad={() => setImageReady(true)}
+            src={image}
+            className={variant}
+            style={{
+              "--border-width": tileBorders ? "var(--tile-border-width)" : 0,
+              "--overlay-opacity": tileBorders ? "0.1" : "0",
+            }}
+          />
 
-            {exposed && (
-              <ItemDescription
-                style={{
-                  "--text-size": `var(--font-size-${exposeFontSize})`,
-                }}
-              >
-                {description}
-              </ItemDescription>
-            )}
-            {tileIcons && <ItemIcon src={Icon[variant]} alt="" />}
-          </>
-        )}
+          {exposed && (
+            <ItemDescription
+              style={{
+                "--text-size": `var(--font-size-${exposeFontSize})`,
+              }}
+            >
+              {description}
+            </ItemDescription>
+          )}
+          {tileIcons && <ItemIcon src={Icon[variant]} alt="" />}
+        </>
       </ContentWrapper>
     </Wrapper>
   );
