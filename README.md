@@ -40,6 +40,16 @@ rm -rf node_modules
 
 ## Frontend config
 
+## Frontend lint
+
+```bash
+docker compose run --rm node yarn check-coding-standards
+```
+
+```bash
+docker compose run --rm node yarn apply-coding-standards
+```
+
 ### How to configure
 
 Following parameters is possible to configure from the `screen` -> `variant` field in the administration.
