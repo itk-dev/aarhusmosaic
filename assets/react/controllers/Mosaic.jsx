@@ -155,10 +155,6 @@ function Mosaic() {
   }, [screen]);
 
   useEffect(() => {
-    console.log(config);
-  }, [config]);
-
-  useEffect(() => {
     if (config === null) {
       return;
     }
