@@ -40,6 +40,16 @@ rm -rf node_modules
 
 ## Frontend config
 
+## Frontend lint
+
+```bash
+docker compose run --rm node yarn check-coding-standards
+```
+
+```bash
+docker compose run --rm node yarn apply-coding-standards
+```
+
 ### How to configure
 
 Following parameters is possible to configure from the `screen` -> `variant` field in the administration.
@@ -69,9 +79,10 @@ Following parameters is possible to configure from the `screen` -> `variant` fie
 | ctaBoxDescription     | Text          | `"ctaBoxDescription":"Skan koden og indsend dit bidrag"` |
 | ctaBoxImage           | Url           | `"https://pathtoimagesource.io/ctaimage.svg"` |
 | ctaBoxBackgroundColor | Hex format    | `"ctaBoxBackgroundColor":"#fff"` |
+| loadingScreenColors   | Array of hex  | `["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]` |
 
 ### Example
 
 ```json
-{"randomTiles":false,"showIcons":false,"showBorders":false,"gridExpose":2,"exposeShowBorder":false,"exposeShowIcon":false,"mosaicLogo":false,"exposeTimeout":14,"ctaBoxTitle":false,"ctaBoxDescription":"Skan koden og indsend dit bidrag","ctaBoxImage":"./qr.svg","ctaBoxBackgroundColor":"#fff","exposeFontSize":"m","footerHeight":"1","footerImageSrc":"./footer.png","footerBackgroundColor":"#F4DCEA"}
+{"randomTiles":false,"showIcons":false,"showBorders":false,"gridExpose":2,"exposeShowBorder":false,"exposeShowIcon":false,"mosaicLogo":false,"exposeTimeout":14,"ctaBoxTitle":false,"ctaBoxDescription":"Skan koden og indsend dit bidrag","ctaBoxImage":"./qr.svg","ctaBoxBackgroundColor":"#fff","exposeFontSize":"m","footerHeight":"1","footerImageSrc":"./footer.png","footerBackgroundColor":"#F4DCEA", "loadingScreenColors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"] }
 ```

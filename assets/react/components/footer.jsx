@@ -1,14 +1,16 @@
 import React from "react";
-import styled from 'styled-components'
+import styled from "styled-components";
 import PropTypes from "prop-types";
 
-function Footer({footerHeight, footerImageSrc, footerBackgroundColor}) {
+function Footer({ footerHeight, footerImageSrc, footerBackgroundColor }) {
   return (
-    <Wrapper style={{
-        '--background-color': footerBackgroundColor,
-        '--footer-height': footerHeight,
-    }}>
-      <Img src={footerImageSrc} alt="test"/>
+    <Wrapper
+      style={{
+        "--background-color": footerBackgroundColor,
+        "--footer-height": footerHeight,
+      }}
+    >
+      <Img src={footerImageSrc} alt="test" />
     </Wrapper>
   );
 }
@@ -28,9 +30,9 @@ const Img = styled.img`
 `;
 
 Footer.propTypes = {
-  footerHeight: PropTypes.string,
-  footerImageSrc: PropTypes.string,
-  footerBackgroundColor: PropTypes.string,
+  footerHeight: PropTypes.string.isRequired,
+  footerImageSrc: PropTypes.string.isRequired,
+  footerBackgroundColor: PropTypes.string.isRequired,
 };
 
 export default Footer;
