@@ -11,6 +11,7 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 - Added linting and skeleton component
+- Display none on image until fully loaded, added default skeleton component colors
 
 ## [1.0.0] - 2023-06-29
 
