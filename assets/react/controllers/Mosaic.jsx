@@ -10,7 +10,7 @@ import CtaBox from "../components/cta-box";
 import Footer from "../components/footer";
 
 function Mosaic() {
-  const TILES_LOADING_INTERVAL = 60 * 1000 * 5;
+  const TILES_LOADING_INTERVAL = 5000;
 
   const [params, setParams] = useState(null);
   const [screen, setScreen] = useState(null);
@@ -141,7 +141,7 @@ function Mosaic() {
       ? totalRows - variant.footerHeight
       : totalRows ?? 5;
     const numberOfTiles = gridColumns * gridRows;
-    const { colors } = variant;
+    const { loadingScreenColors } = variant;
 
     setConfig({
       gridColumns,
@@ -150,7 +150,7 @@ function Mosaic() {
       numberOfTiles,
       randomTiles,
       variant,
-      colors,
+      loadingScreenColors,
     });
   }, [screen]);
 
@@ -217,8 +217,10 @@ function Mosaic() {
             {tiles.map((tile) => (
               <GridItem
                 color={
-                  config.colors[
-                    Math.floor(Math.random() * config.colors.length)
+                  config.loadingScreenColors[
+                    Math.floor(
+                      Math.random() * config.loadingScreenColors.length,
+                    )
                   ]
                 }
                 key={tile["@id"]}
@@ -239,7 +241,7 @@ function Mosaic() {
                 nodeRef={nodeRefs[exposedTile["@id"]]}
               >
                 <GridItem
-                  color={config.colors[0]}
+                  color={config.loadingScreenColors[0]}
                   variant={exposedTile?.extra?.variant}
                   description={exposedTile.description}
                   image={exposedTile.image}

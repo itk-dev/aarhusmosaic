@@ -12,7 +12,7 @@
       "exposeShowIcon": true,
       "mosaicLogo": true,
       "exposeTimeout": 7,
-      "colors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
+      "loadingScreenColors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
     },
     "tags": ["klima", "theoceanrace"]
   },
@@ -29,7 +29,7 @@
       "exposeShowIcon": true,
       "mosaicLogo": false,
       "exposeTimeout": 5,
-      "colors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
+      "loadingScreenColors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
     },
     "tags": ["klima", "theoceanrace"]
   },
@@ -46,7 +46,7 @@
       "exposeShowIcon": false,
       "mosaicLogo": true,
       "exposeTimeout": 5,
-      "colors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
+      "loadingScreenColors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
     },
     "tags": ["klima"]
   },
@@ -68,7 +68,7 @@
       "ctaBoxImage": "https://qr-codes-svg.s3.amazonaws.com/jpTJHD.svg?1680006094578",
       "ctaBoxBackgroundColor": "white",
       "exposeFontSize": "xl",
-      "colors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
+      "loadingScreenColors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"]
     },
     "tags": ["theoceanrace"]
   }

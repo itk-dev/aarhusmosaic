@@ -128,8 +128,6 @@ const ContentWrapper = styled.div`
 const Item = styled.img`
   object-fit: cover;
   position: relative;
-  background-position: center;
-  background-size: cover;
   border-style: solid;
   border-width: var(--border-width);
   border-color: transparent;
