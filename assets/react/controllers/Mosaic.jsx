@@ -10,7 +10,7 @@ import CtaBox from "../components/cta-box";
 import Footer from "../components/footer";
 
 function Mosaic() {
-  const TILES_LOADING_INTERVAL = 5000;
+  const TILES_LOADING_INTERVAL = 60 * 1000 * 5;
 
   const [params, setParams] = useState(null);
   const [screen, setScreen] = useState(null);
@@ -141,7 +141,7 @@ function Mosaic() {
       ? totalRows - variant.footerHeight
       : totalRows ?? 5;
     const numberOfTiles = gridColumns * gridRows;
-    const { loadingScreenColors } = variant;
+    const loadingScreenColors = variant.loadingScreenColors || [];
 
     setConfig({
       gridColumns,

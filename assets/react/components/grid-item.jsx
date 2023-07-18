@@ -22,9 +22,9 @@ function GridItem({
         {!imageReady && (
           <Skeleton
             style={{
-              "--skeleton-color-1": hexToRgba(color, 0.4),
-              "--skeleton-color-2": hexToRgba(color, 0.7),
-              "--skeleton-color-3": hexToRgba(color, 1),
+              "--skeleton-color-1": hexToRgba(color || "#fff", 0.4),
+              "--skeleton-color-2": hexToRgba(color || "#d3d3d3", 0.7),
+              "--skeleton-color-3": hexToRgba(color || "#c0c0c0", 1),
             }}
           />
         )}
@@ -34,6 +34,7 @@ function GridItem({
             src={image}
             className={variant}
             style={{
+              display: imageReady ? "flex" : "none",
               "--border-width": tileBorders ? "var(--tile-border-width)" : 0,
               "--overlay-opacity": tileBorders ? "0.1" : "0",
             }}
