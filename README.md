@@ -5,9 +5,9 @@
 Getting started:
 
 ```shell
-docker compose run --rm node yarn install
 docker compose up -d
 docker compose exec phpfpm composer install
+docker compose run --rm node yarn install
 ```
 
 Install database
@@ -33,8 +33,8 @@ docker compose exec phpfpm bin/console app:user:add xxxx@aarhus.dk <password>
 ```shell
 idc up -d
 idc exec phpfpm composer install
-docker run --rm -v .:/app --workdir /app node:18 yarn install
-docker run --rm -v .:/app --workdir /app node:18 yarn build
+idc run --rm node yarn install
+idc run --rm node yarn build
 rm -rf node_modules
 ```
 
