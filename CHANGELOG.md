@@ -10,6 +10,9 @@ All notable changes to this project will be documented in this file.
 See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information about writing changes to this log.
 
 ## [Unreleased]
+
+## [1.1.0] - 2023-07-19
+
 - Added linting and skeleton component
 - Display none on image until fully loaded, added default skeleton component colors
 - Add "passive" node container to `docker-compose.server.override.yml` to ease install and build
