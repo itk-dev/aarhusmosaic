@@ -42,6 +42,7 @@ services:
       - app
     working_dir: /app
     environment:
-      - YARN_CACHE_FOLDER=/app/.yarn
+      - YARN_CACHE_FOLDER=/app/.yarn/cache
+      - YARN_GLOBAL_DIR=/app/.yarn/global
     volumes:
       - .:/app
