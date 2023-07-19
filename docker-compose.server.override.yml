@@ -44,5 +44,6 @@ services:
     environment:
       - NODE_ENV=prod
       - npm_config_cache=/app/.npm
+      - npm_config_cache=/app/.yarn
     volumes:
       - .:/app
