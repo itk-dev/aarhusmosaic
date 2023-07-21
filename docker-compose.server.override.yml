@@ -42,7 +42,7 @@ services:
       - app
     working_dir: /app
     environment:
-      - NODE_ENV=prod
-      - npm_config_cache=/app/.npm
+      - YARN_CACHE_FOLDER=/app/.yarn/cache
+      - YARN_GLOBAL_DIR=/app/.yarn/global
     volumes:
       - .:/app
