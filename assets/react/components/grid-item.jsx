@@ -1,33 +1,76 @@
-import React from "react";
-import styled from 'styled-components'
-import Icon from './icon';
+import React, { useState } from "react";
+import hexToRgba from "hex-to-rgba";
+import styled from "styled-components";
 import PropTypes from "prop-types";
+import Icon from "./icon";
 
-function GridItem({variant, description, image, exposed, tileIcons, tileBorders, exposeFontSize}) {
-    return (
-        <Wrapper className={exposed ? "exposed" : ""}>
-            <Item className={variant} style={{
-                '--background-image': `url(${image}`,
-                '--border-width': tileBorders ? 'var(--tile-border-width)' : 0,
-                '--overlay-opacity': tileBorders ? '0.1' : '0'
-            }}>
-                {exposed && <ItemDescription style={{
-                      '--text-size': `var(--font-size-${exposeFontSize})`
-                  }}>{description}</ItemDescription>}
-                {tileIcons && <ItemIcon src={Icon[variant]} alt=""/>}
-            </Item>
-        </Wrapper>
-    );
+function GridItem({
+  variant,
+  description,
+  image,
+  exposed,
+  tileIcons,
+  tileBorders,
+  exposeFontSize,
+  color,
+}) {
+  const [imageReady, setImageReady] = useState(false);
+
+  return (
+    <Wrapper className={exposed ? "exposed" : ""}>
+      <ContentWrapper>
+        {!imageReady && (
+          <Skeleton
+            style={{
+              "--skeleton-color-1": hexToRgba(color || "#fff", 0.4),
+              "--skeleton-color-2": hexToRgba(color || "#d3d3d3", 0.7),
+              "--skeleton-color-3": hexToRgba(color || "#c0c0c0", 1),
+            }}
+          />
+        )}
+        <>
+          <Item
+            onLoad={() => setImageReady(true)}
+            src={image}
+            className={variant}
+            style={{
+              display: imageReady ? "flex" : "none",
+              "--border-width": tileBorders ? "var(--tile-border-width)" : 0,
+              "--overlay-opacity": tileBorders ? "0.1" : "0",
+            }}
+          />
+
+          {exposed && (
+            <ItemDescription
+              style={{
+                "--text-size": `var(--font-size-${exposeFontSize})`,
+              }}
+            >
+              {description}
+            </ItemDescription>
+          )}
+          {tileIcons && <ItemIcon src={Icon[variant]} alt="" />}
+        </>
+      </ContentWrapper>
+    </Wrapper>
+  );
 }
 
+GridItem.defaultProps = {
+  exposed: false,
+  tileIcons: null,
+  tileBorders: false,
+  exposeFontSize: "",
+};
+
 GridItem.propTypes = {
-    variant: PropTypes.string,
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    exposed: PropTypes.bool,
-    tileIcons: PropTypes.bool,
-    tileBorders: PropTypes.bool,
-    exposeFontSize: PropTypes.string,
+  variant: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  exposed: PropTypes.bool,
+  tileIcons: PropTypes.bool,
+  tileBorders: PropTypes.bool,
+  exposeFontSize: PropTypes.string,
 };
 
 const ItemDescription = styled.p`
@@ -54,11 +97,38 @@ const ItemIcon = styled.img`
   height: 20%;
 `;
 
-const Item = styled.div`
+const Skeleton = styled.div`
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  width: calc(100vw / var(--grid-columns));
+  height: calc(100vh / var(--total-rows));
+  background: linear-gradient(
+    -45deg,
+    var(--skeleton-color-3),
+    var(--skeleton-color-2),
+    var(--skeleton-color-1)
+  );
+  background-size: 400% 400%;
+  animation: gradient 2s ease infinite;
+`;
+
+const ContentWrapper = styled.div`
   position: relative;
-  background-image: var(--background-image);
-  background-position: center;
-  background-size: cover;
+`;
+
+const Item = styled.img`
+  object-fit: cover;
+  position: relative;
   border-style: solid;
   border-width: var(--border-width);
   border-color: transparent;

@@ -1,11 +1,9 @@
 import React from "react";
-import styled from 'styled-components'
-import Icon from './icon';
+import styled from "styled-components";
+import Icon from "./icon";
 
 function Logo() {
-  return (
-    <LogoImg src={Icon.verdensmaal} alt=""/>
-  );
+  return <LogoImg src={Icon.verdensmaal} alt="" />;
 }
 
 const LogoImg = styled.img`

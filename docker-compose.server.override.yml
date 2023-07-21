@@ -24,6 +24,7 @@ services:
       - app
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      - "selvbetjening.aarhuskommune.dk:40.127.143.145"
     volumes:
       - .:/app
 
@@ -31,3 +32,17 @@ services:
     environment:
       - PHP_APCU_ENABLED=1
       - PHP_APCU_ENABLED_CLI=1
+      - PHP_MEMORY_LIMIT=256M
+
+  # Build container for frontend assets
+  node:
+    user: '1042'
+    image: node:18
+    networks:
+      - app
+    working_dir: /app
+    environment:
+      - YARN_CACHE_FOLDER=/app/.yarn/cache
+      - YARN_GLOBAL_DIR=/app/.yarn/global
+    volumes:
+      - .:/app

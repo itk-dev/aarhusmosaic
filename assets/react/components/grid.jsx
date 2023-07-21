@@ -1,12 +1,8 @@
 import React from "react";
-import styled from 'styled-components'
+import styled from "styled-components";
 
-function Grid(props) {
-  return (
-    <Wrapper {...props}>
-      {props.children}
-    </Wrapper>
-  );
+function Grid({ style, children }) {
+  return <Wrapper style={style}>{children}</Wrapper>;
 }
 
 const Wrapper = styled.div`
@@ -14,7 +10,7 @@ const Wrapper = styled.div`
   grid-template-rows: repeat(var(--grid-rows), 1fr);
   grid-template-columns: repeat(var(--grid-columns), 1fr);
   gap: 0;
-  height: calc((100vh / var(--total-rows)) * var(--grid-rows))
+  height: calc((100vh / var(--total-rows)) * var(--grid-rows));
 `;
 
 export default Grid;
