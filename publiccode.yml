@@ -2,69 +2,65 @@
 # metadata file that makes public software easily discoverable.
 # More info at https://github.com/italia/publiccode.yml
 
-publiccodeYmlVersion: "0.2"
+publiccodeYmlVersion: "0.3"
 name: Mosaic
+developmentStatus: concept
+softwareType: standalone/web
 applicationSuite: Aarhus mosaic
 url: "https://github.com/itk-dev/aarhusmosaic"
 landingURL: "https://mosaik.aarhuskommune.dk/login"
 softwareVersion: "1.0"
 releaseDate: "2023-04-20"
-logo: img/logo.svg
 platforms:
-   - web
+  - web
 categories:
-   - content-management
+  - content-management
 usedBy:
-   - Aarhus kommune
-roadmap: ""  
+  - Aarhus kommune
 intendedAudience:
-   scope:
-     - communications
-   countries:
-     - da
+  scope:
+    - society
+  countries:
+    - da
 description:
-   en:
-     localisedName: Mossaic
-     shortDescription: >
-           Aarhus mossaic is a posibility to post image and texts to an API and via interface administration manage screen views and presentations.
-     longDescription: >
-           Aarhus mossaic uses OS2forms (drupal webform) to create tiles for users. And so on.
-     documentation: "https://github.com/itk-dev/aarhusmosaic"
-     apiDocumentation: "https://mosaic.srvitkstgweb01.itkdev.dk/api/v1"
-     features:
-        - Get tiles
-        - Accept tiles
-        - Add screens
-        - Add API keys
-        - View screens
-        -
-     screenshots:
-        -
+  en:
+    localisedName: Mossaic
+    shortDescription: >
+      Aarhus mosaic uses OS2forms (drupal webform) to create tiles for users. And so on.
+    longDescription: >
+      Aarhus mosaic is a posibility to post image and texts to an API and via interface administration manage screen views and presentations.
+      bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla
+    documentation: "https://github.com/itk-dev/aarhusmosaic"
+    apiDocumentation: "https://mosaic.srvitkstgweb01.itkdev.dk/api/v1"
+    features:
+      - Get tiles
+      - Accept tiles
+      - Add screens
+      - Add API keys
+      - View screens
 legal:
-   license: MPL-2.0
-   mainCopyrightOwner: City of Aarhus
-   repoOwner: City of Aarhus
-   authorsFile: AUTHORS
+  license: MPL-2.0
+  mainCopyrightOwner: City of Aarhus
+  repoOwner: City of Aarhus
 maintenance:
-   type: "contract"
-   contractors:
-     - name: "ITK development"
-       email: "itkdev@aarhus.dk"
-       website: "https://privatecompany.com"
-       until: "2024-01-01"
-   contacts:
-     - name: ITK development
-       email: "itkdev@aarhus.dk"
-       affiliation: Aarhus kommune
-       phone: "+45 41854181"
-
+  type: "contract"
+  contractors:
+    - name: "ITK development"
+      email: "itkdev@aarhus.dk"
+      website: "https://privatecompany.com"
+      until: "2024-01-01"
+  contacts:
+    - name: ITK development
+      email: "itkdev@aarhus.dk"
+      affiliation: Aarhus kommune
+      phone: "+45 41854181"
 localisation:
-   localisationReady: false
-   availableLanguages:
-     - da
-     - en
- dependsOn:
-   open:
+  localisationReady: false
+  availableLanguages:
+    - da
+    - en
+dependsOn:
+  open:
     - name: PHP
       versionMin: ".1"
       versionMax: "1.3"
@@ -76,8 +72,8 @@ localisation:
     - name: Oracle
       versionMin: "11.4"
     - name: IBM SoftLayer
-da:
-  countryExtensionVersion: "1.0"
+it:
+  countryExtensionVersion: "0.2"
   conforme:
     lineeGuidaDesign: false
     modelloInteroperabilita: false
