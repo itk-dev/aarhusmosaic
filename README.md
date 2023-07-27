@@ -86,3 +86,19 @@ Following parameters is possible to configure from the `screen` -> `variant` fie
 ```json
 {"randomTiles":false,"showIcons":false,"showBorders":false,"gridExpose":2,"exposeShowBorder":false,"exposeShowIcon":false,"mosaicLogo":false,"exposeTimeout":14,"ctaBoxTitle":false,"ctaBoxDescription":"Skan koden og indsend dit bidrag","ctaBoxImage":"./qr.svg","ctaBoxBackgroundColor":"#fff","exposeFontSize":"m","footerHeight":"1","footerImageSrc":"./footer.png","footerBackgroundColor":"#F4DCEA", "loadingScreenColors": ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"] }
 ```
+
+## publiccode.yml
+
+This code adheres to the
+[publiccode.yml](https://github.com/publiccodeyml/publiccode.yml) standard by
+including a [`publiccode.yml`](publiccode.yml) metadata file that makes public
+software easily discoverable. See [`publiccode.yml`](publiccode.yml) for details.
+
+Validate the `publiccode.yml` file by running
+
+```shell
+docker run --interactive italia/publiccode-parser-go /dev/stdin < publiccode.yml
+```
+
+The validation is automatically performed by a GitHub Action whenever a pull
+request is made (cf. [`.github/workflows/pr.yaml`](.github/workflows/pr.yaml)).

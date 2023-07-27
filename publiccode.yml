@@ -1,0 +1,87 @@
+# This repository adheres to the publiccode.yml standard by including this
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: "0.3"
+name: Mosaic
+developmentStatus: concept
+softwareType: standalone/web
+applicationSuite: Aarhus mosaic
+url: "https://github.com/itk-dev/aarhusmosaic"
+landingURL: "https://mosaik.aarhuskommune.dk/login"
+softwareVersion: "1.0"
+releaseDate: "2023-04-20"
+platforms:
+  - web
+categories:
+  - content-management
+usedBy:
+  - Aarhus kommune
+intendedAudience:
+  scope:
+    - society
+  countries:
+    - da
+description:
+  en:
+    localisedName: Mossaic
+    shortDescription: >
+      Aarhus mosaic uses OS2forms (drupal webform) to create tiles for users. And so on.
+    longDescription: >
+      Aarhus mosaic is a posibility to post image and texts to an API and via the administration manage screen views and presentation styles of the tiles. It is possible to create views with tile borders, logos, foooters, change the previeved image size, look and time exposed.
+    documentation: "https://github.com/itk-dev/aarhusmosaic"
+    apiDocumentation: "https://mosaic.srvitkstgweb01.itkdev.dk/api/v1"
+    features:
+      - Get tiles
+      - Accept tiles
+      - Add screens
+      - Add API keys
+      - View screens
+legal:
+  license: MPL-2.0
+  mainCopyrightOwner: City of Aarhus
+  repoOwner: City of Aarhus
+maintenance:
+  type: "contract"
+  contractors:
+    - name: "ITK development"
+      email: "itkdev@aarhus.dk"
+      website: "https://privatecompany.com"
+      until: "2024-01-01"
+  contacts:
+    - name: ITK development
+      email: "itkdev@aarhus.dk"
+      affiliation: Aarhus kommune
+      phone: "+45 41854181"
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - da
+    - en
+dependsOn:
+  open:
+    - name: PHP
+      versionMin: ".1"
+      versionMax: "1.3"
+      optional: true
+    - name: PostgreSQL
+      version: "3.2"
+      optional: true
+  proprietary:
+    - name: Oracle
+      versionMin: "11.4"
+    - name: IBM SoftLayer
+it:
+  countryExtensionVersion: "0.2"
+  conforme:
+    lineeGuidaDesign: false
+    modelloInteroperabilita: false
+    misureMinimeSicurezza: true
+    gdpr: true
+  piattaforme:
+    spid: false
+    cie: false
+    anpr: false
+    pagopa: false
+  riuso:
+    codiceIPA:
