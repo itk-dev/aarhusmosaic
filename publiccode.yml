@@ -28,8 +28,7 @@ description:
     shortDescription: >
       Aarhus mosaic uses OS2forms (drupal webform) to create tiles for users. And so on.
     longDescription: >
-      Aarhus mosaic is a posibility to post image and texts to an API and via interface administration manage screen views and presentations.
-      bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla
+      Aarhus mosaic is a posibility to post image and texts to an API and via the administration manage screen views and presentation styles of the tiles. It is possible to create views with tile borders, logos, foooters, change the previeved image size, look and time exposed.
     documentation: "https://github.com/itk-dev/aarhusmosaic"
     apiDocumentation: "https://mosaic.srvitkstgweb01.itkdev.dk/api/v1"
     features:
