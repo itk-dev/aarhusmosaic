@@ -163,11 +163,11 @@ const Item = styled.img`
     }
   }
 
-  &.tree {
-    border-color: var(--color-tree);
+  &.three {
+    border-color: var(--color-three);
 
     &::before {
-      background-color: var(--color-tree);
+      background-color: var(--color-three);
     }
   }
 

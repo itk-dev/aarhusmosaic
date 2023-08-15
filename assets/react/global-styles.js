@@ -114,7 +114,7 @@ const GlobalStyles = createGlobalStyle`
     */
     --color-one: #e5243b;
     --color-two: #dda63a;
-    --color-tree: #4c9f38;
+    --color-three: #4c9f38;
     --color-four: #c5192d;
     --color-five: #ff3a21;
     --color-six: #26bde2;

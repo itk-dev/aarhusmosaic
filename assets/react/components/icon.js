@@ -1,6 +1,6 @@
 import one from "../assets/icons/single-rgb-2016-01.svg";
 import two from "../assets/icons/single-rgb-2016-02.svg";
-import tree from "../assets/icons/single-rgb-2016-03.svg";
+import three from "../assets/icons/single-rgb-2016-03.svg";
 import four from "../assets/icons/single-rgb-2016-04.svg";
 import five from "../assets/icons/single-rgb-2016-05.svg";
 import six from "../assets/icons/single-rgb-2016-06.svg";
@@ -19,7 +19,7 @@ import verdensmaal from "../assets/icons/verdensmaal-color-vertical.svg";
 const Icon = {
   one,
   two,
-  tree,
+  three,
   four,
   five,
   six,
