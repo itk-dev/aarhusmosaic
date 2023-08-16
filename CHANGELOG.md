@@ -11,6 +11,8 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 
+- Fix spelling of number 3
+
 ## [1.1.0] - 2023-07-19
 
 - Added linting and skeleton component
