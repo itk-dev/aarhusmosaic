@@ -7,12 +7,6 @@ framework:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
             async_priority_high:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
-                options:
-                    exchange:
-                        name: high
-                        type: fanout
-                    queues:
-                        high: ~
 
             failed:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN_FAILED)%'

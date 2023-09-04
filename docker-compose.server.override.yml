@@ -1,15 +1,4 @@
 services:
-  rabbit:
-    image: rabbitmq:3.11-management-alpine
-    restart: unless-stopped
-    networks:
-      - app
-      - frontend
-    environment:
-      - "RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}"
-      - "RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}"
-      - "RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}"
-
   supervisor:
     image: itkdev/supervisor-php8.1:alpine
     restart: unless-stopped
