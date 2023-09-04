@@ -11,6 +11,8 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 
 ## [Unreleased]
 
+- Removed rabbit (remember to update .env when releasing)
+- Updated docker compose setup
 - Fix spelling of number 3
 
 ## [1.1.0] - 2023-07-19
